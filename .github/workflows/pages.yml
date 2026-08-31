@@ -1,4 +1,8 @@
-name: Build and deploy to GitHub Pages
+name: Deploy to GitHub Pages
+
+# Requires Pages to be switched on once:
+#   Settings -> Pages -> Source -> GitHub Actions
+# Until then this workflow fails at configure-pages; CI still runs in ci.yml.
 
 on:
   push:
@@ -26,17 +30,6 @@ jobs:
 
       - name: Build the site
         run: python3 build.py
-
-      - name: Fail on broken links, missing assets or bad ARIA wiring
-        run: python3 tools/check.py
-
-      - name: Confirm the committed HTML matches src/
-        run: |
-          if ! git diff --quiet -- '*.html' sitemap.xml robots.txt site.webmanifest; then
-            echo "::error::Generated files are out of date. Run 'python3 build.py' and commit the result."
-            git --no-pager diff --stat -- '*.html' sitemap.xml robots.txt site.webmanifest
-            exit 1
-          fi
 
       # enablement lets this workflow turn Pages on itself, so the repo owner
       # does not have to flip the setting by hand before the first deploy.

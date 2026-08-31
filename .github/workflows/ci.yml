@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build the site
+        run: python3 build.py
+
+      - name: Fail on broken links, missing assets or bad ARIA wiring
+        run: python3 tools/check.py
+
+      - name: Confirm the committed HTML matches src/
+        run: |
+          if ! git diff --quiet -- '*.html' sitemap.xml robots.txt site.webmanifest; then
+            echo "::error::Generated files are out of date. Run 'python3 build.py' and commit the result."
+            git --no-pager diff --stat -- '*.html' sitemap.xml robots.txt site.webmanifest
+            exit 1
+          fi

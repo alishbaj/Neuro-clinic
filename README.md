@@ -144,10 +144,21 @@ horizontal overflow at 375px, 768px and 1280px.
 
 ## Deploying
 
-Pushing to `main` publishes to GitHub Pages via `.github/workflows/pages.yml`. Enable it once under
-**Settings → Pages → Source → GitHub Actions**.
+Live at **<https://alishbaj.github.io/Neuro-clinic/>**
 
-The workflow rebuilds from `src/` and runs `tools/check.py`, so a broken link fails the deploy.
+Pages is configured as *Settings → Pages → Source → Deploy from a branch → `gh-pages` / (root)*, so
+the branch `gh-pages` holds the built site and `main` holds the source.
+
+Pushing to `main` runs `.github/workflows/publish.yml`, which rebuilds from `src/`, runs
+`tools/check.py` and force-pushes the result to `gh-pages` — a broken link fails before publishing.
+That workflow needs *Settings → Actions → General → Workflow permissions* set to
+**Read and write permissions**.
+
+If it cannot push, publish from a machine with write access instead:
+
+```bash
+./tools/publish.sh
+```
 
 ---
 

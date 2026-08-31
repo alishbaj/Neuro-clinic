@@ -1,0 +1,54 @@
+name: Build and deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build the site
+        run: python3 build.py
+
+      - name: Fail on broken links, missing assets or bad ARIA wiring
+        run: python3 tools/check.py
+
+      - name: Confirm the committed HTML matches src/
+        run: |
+          if ! git diff --quiet -- '*.html' sitemap.xml robots.txt site.webmanifest; then
+            echo "::error::Generated files are out of date. Run 'python3 build.py' and commit the result."
+            git --no-pager diff --stat -- '*.html' sitemap.xml robots.txt site.webmanifest
+            exit 1
+          fi
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

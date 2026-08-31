@@ -1,0 +1,188 @@
+<section class="hero hero--page on-ink" aria-labelledby="page-title">
+  <div class="hero__media">{{img:waiting-room|The waiting area at Longevity Neurology Center||100vw|eager}}</div>
+  <div class="hero__scrim"></div>
+  <div class="container hero__inner">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol><li><a href="index.html">Home</a></li><li><span aria-current="page">Patient Resources</span></li></ol>
+    </nav>
+    <p class="eyebrow">Before You Book</p>
+    <h1 class="hero__title serif" id="page-title" style="text-transform:none;letter-spacing:0">Patient Resources</h1>
+    <p class="hero__sub"><strong>Please read this page before booking your appointment.</strong></p>
+    <div class="hero__actions">
+      <a class="btn btn--gold btn--lg" href="{{site.booking}}" target="_blank" rel="noopener noreferrer">
+        {{icon:calendar}}Book Now</a>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight section--alt">
+  <div class="container">
+    <nav class="toc" aria-labelledby="toc-title" data-reveal>
+      <h2 id="toc-title">On this page</h2>
+      <ol>
+        <li><a href="#new-patients">New patient information</a></li>
+        <li><a href="#insurance">Insurance &amp; pricing information</a></li>
+        <li><a href="#medicare">Medicare patients</a></li>
+        <li><a href="#fees">Individual service fees</a></li>
+        <li><a href="#membership">Concierge annual membership</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<section class="section" id="new-patients" aria-labelledby="new-title">
+  <div class="container split">
+    <div data-reveal>
+      <p class="eyebrow">New Patient Information</p>
+      <h2 class="title-lg serif" id="new-title">What to bring to your first appointment</h2>
+      <hr class="rule-gold">
+      <ul class="pill-grid" style="list-style:none;margin:0;padding:0;grid-template-columns:minmax(0,1fr)">
+        <li class="pill">{{icon:check}}<span>Completed new patient forms, if provided in advance.</span></li>
+        <li class="pill">{{icon:check}}<span>A list of your current medications and supplements, including dosages.</span></li>
+        <li class="pill">{{icon:check}}<span>Copies of any relevant medical records, imaging reports (MRI, CT scans) and lab results.</span></li>
+        <li class="pill">{{icon:check}}<span>Your insurance card — for billing of external labs, imaging and so on, as our practice is fee-for-service for consultations.</span></li>
+        <li class="pill">{{icon:check}}<span>A list of questions you may have for Dr. Powell.</span></li>
+      </ul>
+      <p class="mt-6">
+        <a class="btn btn--outline" href="contact.html">{{icon:file-text}}Access Forms</a>
+      </p>
+      <p class="muted" style="font-size:var(--f-sm);margin-top:.75rem">New patient forms are sent to you
+        directly once your appointment is confirmed. Contact the office if you have not received them.</p>
+    </div>
+    <div class="split__media frame" data-reveal>
+      {{img:exam-room-window|An examination room with natural light at the clinic||(max-width: 900px) 92vw, 480px}}
+    </div>
+  </div>
+</section>
+
+<section class="section section--cream" id="insurance" aria-labelledby="ins-title">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Insurance &amp; Pricing Information</p>
+      <h2 class="title-lg serif" id="ins-title">No insurance accepted</h2>
+      <p class="lede">Longevity Neurology Center operates on a direct fee-for-service model.</p>
+    </div>
+
+    <div class="grid grid-2" data-reveal-group>
+      <article class="card" data-reveal>
+        <span class="card__icon">{{icon:credit-card}}</span>
+        <h3 class="title-sm mt-5">How payment works</h3>
+        <p>We do not accept or bill insurance for Dr. Powell&rsquo;s consultation services, and full
+          payment is required at the time of the visit.</p>
+        <p>However, any imaging, laboratory testing, procedures or medications ordered by Dr. Powell are
+          billed to your insurance just as they would be at any traditional clinic, subject to your
+          plan&rsquo;s usual copays, deductibles and coverage rules.</p>
+        <p>This approach allows Dr. Powell to provide a higher level of personalized care, spend more
+          dedicated time with each patient, and offer faster, more accessible appointments.</p>
+      </article>
+
+      <article class="card" data-reveal>
+        <span class="card__icon">{{icon:file-text}}</span>
+        <h3 class="title-sm mt-5">Superbills &amp; reimbursement</h3>
+        <p>A superbill will be provided for each visit, which you may submit to your insurance for
+          possible out-of-network reimbursement.</p>
+        <p>You may request an itemized receipt after your visit, which you can then submit to your
+          insurance company for potential reimbursement if you have out-of-network benefits.</p>
+        <p><strong>Please note</strong> that Medicare and Medicaid do not allow any filing for
+          reimbursement for services provided under this model.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="medicare" aria-labelledby="medicare-title">
+  <div class="container container--narrow" data-reveal>
+    <div class="notice">
+      {{icon:alert-circle}}
+      <div>
+        <h3 id="medicare-title">Medicare patients</h3>
+        <p>Our clinic operates on a fee-for-service concierge model and does not participate with Medicare
+          or Medicaid. While we are happy to evaluate and care for you, services provided through our
+          clinic are not eligible for reimbursement through government-sponsored insurance programmes.</p>
+        <p>Please email us at <a href="mailto:{{site.email}}">{{site.email}}</a> for any questions or
+          assistance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" id="fees" aria-labelledby="fees-title">
+  <div class="container split">
+    <div data-reveal>
+      <p class="eyebrow">Individual Service Fees</p>
+      <h2 class="title-lg serif" id="fees-title">Please contact us for pricing</h2>
+      <hr class="rule-gold">
+      <p>Fees vary by the type and length of consultation and by any procedures performed. We are happy
+        to give you a clear figure before you book, so there are no surprises on the day.</p>
+      <div class="cluster mt-6">
+        <a class="btn" href="contact.html">{{icon:mail}}Request Pricing</a>
+        <a class="link-arrow" href="tel:{{site.phone_href}}">Or call {{site.phone}}{{icon:arrow-right}}</a>
+      </div>
+    </div>
+
+    <div class="split__media" data-reveal>
+      <div class="table-wrap">
+        <table class="data">
+          <caption>What is and is not billed to insurance</caption>
+          <thead>
+            <tr><th scope="col">Item</th><th scope="col">Billed to insurance?</th></tr>
+          </thead>
+          <tbody>
+            <tr><th scope="row">Consultations with Dr. Powell</th><td>No — paid at time of visit</td></tr>
+            <tr><th scope="row">Therapeutic injections in clinic</th><td>No — paid at time of visit</td></tr>
+            <tr><th scope="row">Laboratory testing</th><td>Yes — billed by the lab</td></tr>
+            <tr><th scope="row">Imaging (MRI, CT)</th><td>Yes — billed by the imaging centre</td></tr>
+            <tr><th scope="row">EMG / nerve conduction studies</th><td>Yes — billed by the facility</td></tr>
+            <tr><th scope="row">EEG</th><td>Yes — billed by the facility</td></tr>
+            <tr><th scope="row">Neuro-cognitive testing</th><td>Yes — billed by the facility</td></tr>
+            <tr><th scope="row">Prescribed medications</th><td>Yes — billed by your pharmacy</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--ink-grad on-ink" id="membership" aria-labelledby="mem-title">
+  <div class="container container--narrow center" data-reveal>
+    <p class="badge badge--soon">Coming Soon</p>
+    <h2 class="title-lg serif mt-5" id="mem-title">Concierge annual membership</h2>
+    <hr class="rule-gold">
+    <p class="lede" style="margin-inline:auto">A limited number of concierge annual memberships will be
+      available.</p>
+    <div class="grid grid-3 mt-7" data-reveal-group style="text-align:left">
+      <article class="card card--ink card--hover" data-reveal>
+        <span class="card__icon">{{icon:credit-card}}</span>
+        <h3>Discounted fees</h3>
+        <p>Reduced rates on services across the year.</p>
+      </article>
+      <article class="card card--ink card--hover" data-reveal>
+        <span class="card__icon">{{icon:clock}}</span>
+        <h3>Priority scheduling</h3>
+        <p>Prioritized appointments, typically within a 24–72 hour timeframe.</p>
+      </article>
+      <article class="card card--ink card--hover" data-reveal>
+        <span class="card__icon">{{icon:phone}}</span>
+        <h3>After-hours access</h3>
+        <p>A limited number of after-hour virtual or phone consultations with Dr. Powell.</p>
+      </article>
+    </div>
+    <p class="mt-7"><a class="btn btn--gold btn--lg" href="contact.html">Register Your Interest{{icon:arrow-right}}</a></p>
+  </div>
+</section>
+
+<section class="cta-band section on-ink" aria-labelledby="res-cta">
+  <div class="cta-band__media">{{img:clinic-entrance|The entrance to Longevity Neurology Center|}}</div>
+  <div class="cta-band__scrim"></div>
+  <div class="container cta-band__inner">
+    <div>
+      <p class="eyebrow">Ready?</p>
+      <h2 class="title-md serif" id="res-cta">Book your appointment</h2>
+      <p class="lede">Questions first? Email <a href="mailto:{{site.email}}">{{site.email}}</a>.</p>
+    </div>
+    <div class="cluster">
+      <a class="btn btn--gold btn--lg" href="{{site.booking}}" target="_blank" rel="noopener noreferrer">
+        {{icon:calendar}}Book Appointment</a>
+    </div>
+  </div>
+</section>

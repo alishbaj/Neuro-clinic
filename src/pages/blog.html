@@ -1,0 +1,76 @@
+<section class="hero hero--page on-ink" aria-labelledby="page-title">
+  <div class="hero__media">{{img:patient-education|A neurologist explaining brain health to a patient||100vw|eager}}</div>
+  <div class="hero__scrim"></div>
+  <div class="container hero__inner">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol><li><a href="index.html">Home</a></li><li><span aria-current="page">Blog</span></li></ol>
+    </nav>
+    <p class="eyebrow">Neurology Educational Blog</p>
+    <h1 class="hero__title serif" id="page-title" style="text-transform:none;letter-spacing:0">
+      Brain health, explained</h1>
+    <p class="hero__sub">Practical, evidence-informed writing from Dr. Tasha Powell on prevention,
+      cognition, nutrition and the conditions we see every week.</p>
+  </div>
+</section>
+
+<section class="section" aria-labelledby="posts-title">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <h2 class="title-lg serif" id="posts-title">All posts</h2>
+      <p class="lede">Six articles and counting.</p>
+    </div>
+
+    <div class="grid grid-3" data-reveal-group>
+      {{post_cards}}
+    </div>
+  </div>
+</section>
+
+<section class="section section--ink-grad on-ink" aria-labelledby="topics-title">
+  <div class="container">
+    <div class="section-head center" data-reveal>
+      <p class="eyebrow eyebrow--center">What We Write About</p>
+      <h2 class="title-lg serif" id="topics-title">Topics we return to</h2>
+    </div>
+    <div class="grid grid-4" data-reveal-group>
+      <article class="card card--ink card--hover" data-reveal>
+        <span class="card__icon">{{icon:shield-check}}</span>
+        <h3>Prevention</h3>
+        <p>What the evidence actually supports for reducing dementia and stroke risk.</p>
+      </article>
+      <article class="card card--ink card--hover" data-reveal>
+        <span class="card__icon">{{icon:leaf}}</span>
+        <h3>Nutrition</h3>
+        <p>Food as medicine — the gut–brain axis, inflammation and metabolic health.</p>
+      </article>
+      <article class="card card--ink card--hover" data-reveal>
+        <span class="card__icon">{{icon:brain}}</span>
+        <h3>Brain Health</h3>
+        <p>Coordination, sleep, cognitive reserve and the habits that protect them.</p>
+      </article>
+      <article class="card card--ink card--hover" data-reveal>
+        <span class="card__icon">{{icon:stethoscope}}</span>
+        <h3>Conditions</h3>
+        <p>Clear explanations of the disorders we diagnose and manage.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band section on-ink" aria-labelledby="blog-cta">
+  <div class="cta-band__media">{{img:consult-exam|Dr. Powell with a patient during an examination|}}</div>
+  <div class="cta-band__scrim"></div>
+  <div class="container cta-band__inner">
+    <div>
+      <p class="eyebrow">From Reading to Action</p>
+      <h2 class="title-md serif" id="blog-cta">Turn this into a plan for your own brain</h2>
+      <p class="lede">A preventive neurological assessment translates the research into steps that fit
+        your life.</p>
+    </div>
+    <div class="cluster">
+      <a class="btn btn--gold btn--lg" href="{{site.booking}}" target="_blank" rel="noopener noreferrer">
+        {{icon:calendar}}Book Appointment</a>
+      <a class="btn btn--ghost-light btn--lg" href="services.html">Our Services</a>
+    </div>
+  </div>
+</section>

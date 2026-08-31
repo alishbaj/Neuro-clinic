@@ -1,0 +1,175 @@
+<section class="hero hero--page on-ink" aria-labelledby="page-title">
+  <div class="hero__media">{{img:clinic-entrance|A patient arriving at Longevity Neurology Center||100vw|eager}}</div>
+  <div class="hero__scrim"></div>
+  <div class="container hero__inner">
+    <nav class="crumbs" aria-label="Breadcrumb">
+      <ol><li><a href="index.html">Home</a></li><li><span aria-current="page">Contact</span></li></ol>
+    </nav>
+    <p class="eyebrow">Contact</p>
+    <h1 class="hero__title serif" id="page-title" style="text-transform:none;letter-spacing:0">Contact us</h1>
+    <p class="hero__sub">We are here to answer your questions and help you begin your journey toward
+      optimal brain health.</p>
+  </div>
+</section>
+
+<section class="section section--tight">
+  <div class="container" data-reveal>
+    <div class="notice">
+      {{icon:alert-circle}}
+      <div>
+        <h3>This form is for general inquiries only</h3>
+        <p>If you are experiencing a medical emergency, please dial <a href="tel:911"><strong>911</strong></a>
+          or go to the nearest emergency room.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0" aria-labelledby="details-title">
+  <div class="container split" style="align-items:start">
+    <div data-reveal>
+      <p class="eyebrow">Longevity Neurology Center</p>
+      <h2 class="title-md serif" id="details-title">Get in touch</h2>
+      <hr class="rule-gold">
+
+      <ul class="info-list">
+        <li>
+          <span class="info-list__icon">{{icon:map-pin}}</span>
+          <div><dl>
+            <dt>Address</dt>
+            <dd><a href="{{site.maps_link}}" target="_blank" rel="noopener noreferrer">
+              {{site.address_1line}}{{icon:external-link}}</a></dd>
+          </dl></div>
+        </li>
+        <li>
+          <span class="info-list__icon">{{icon:mail}}</span>
+          <div><dl><dt>Email</dt><dd><a href="mailto:{{site.email}}">{{site.email}}</a></dd></dl></div>
+        </li>
+        <li>
+          <span class="info-list__icon">{{icon:phone}}</span>
+          <div><dl><dt>Telephone</dt><dd><a href="tel:{{site.phone_href}}">{{site.phone}}</a></dd></dl></div>
+        </li>
+        <li>
+          <span class="info-list__icon">{{icon:printer}}</span>
+          <div><dl><dt>Fax</dt><dd>{{site.fax}}</dd></dl></div>
+        </li>
+        <li>
+          <span class="info-list__icon">{{icon:clock}}</span>
+          <div><dl><dt>Office Hours</dt><dd>
+            <ul class="hours" style="margin-top:.25rem">
+              <li><span class="day">Monday – Friday</span><span>9:00 AM – 4:30 PM</span></li>
+              <li><span class="day">Saturday</span><span>By Appointment Only</span></li>
+              <li><span class="day">Sunday</span><span>Closed</span></li>
+            </ul>
+          </dd></dl></div>
+        </li>
+      </ul>
+
+      <p class="mt-7">
+        <a class="btn btn--lg" href="{{site.booking}}" target="_blank" rel="noopener noreferrer">
+          {{icon:calendar}}Book Appointment</a>
+      </p>
+    </div>
+
+    <!-- ------------------------------------------------------------- FORM -->
+    <div class="split__media" data-reveal>
+      <div class="card" style="gap:var(--sp-5)">
+        <div>
+          <p class="eyebrow" style="margin-bottom:.5rem">Send a Message</p>
+          <h2 class="title-sm" style="margin-bottom:.5rem">Send a message to Longevity Neurology Center</h2>
+          <p class="muted" style="font-size:var(--f-sm);margin:0">If you have any questions, concerns or
+            comments, please fill out the short form below.</p>
+        </div>
+
+        <form class="form" data-validate novalidate>
+          <div class="form__status" role="status" tabindex="-1" aria-live="polite">
+            {{icon:info}}<span class="form__status-text"></span>
+          </div>
+
+          <div class="form__row">
+            <div class="field">
+              <label for="firstName">First name <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="firstName" name="firstName" autocomplete="given-name"
+                     required aria-describedby="firstName-error">
+              <p class="error" id="firstName-error">{{icon:alert-circle}}<span class="error-text">This field is required.</span></p>
+            </div>
+            <div class="field">
+              <label for="lastName">Last name <span class="req" aria-hidden="true">*</span></label>
+              <input type="text" id="lastName" name="lastName" autocomplete="family-name"
+                     required aria-describedby="lastName-error">
+              <p class="error" id="lastName-error">{{icon:alert-circle}}<span class="error-text">This field is required.</span></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="email">Email <span class="req" aria-hidden="true">*</span></label>
+            <input type="email" id="email" name="email" autocomplete="email" placeholder="name@example.com"
+                   required aria-describedby="email-error">
+            <p class="error" id="email-error">{{icon:alert-circle}}<span class="error-text">Enter a valid email address.</span></p>
+          </div>
+
+          <div class="field">
+            <label for="phone">Phone</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="480-770-0427"
+                   aria-describedby="phone-hint phone-error">
+            <p class="hint" id="phone-hint">Optional — helpful if you would prefer a call back.</p>
+            <p class="error" id="phone-error">{{icon:alert-circle}}<span class="error-text">Enter a valid phone number.</span></p>
+          </div>
+
+          <div class="field">
+            <label for="comment">Comment</label>
+            <textarea id="comment" name="comment" rows="5"
+                      placeholder="How can we help?" aria-describedby="comment-hint"></textarea>
+            <p class="hint" id="comment-hint">Please do not include private health information.</p>
+          </div>
+
+          <div class="check">
+            <input type="checkbox" id="consent-email" name="consentEmail" required aria-describedby="consent-email-error">
+            <label for="consent-email">I understand and agree that any information submitted will be
+              forwarded to our office by email and not via a secure messaging system. This form should not
+              be used to transmit private health information, and we disclaim all warranties with respect
+              to the privacy and confidentiality of any information submitted through this form.
+              <span class="req" aria-hidden="true">*</span></label>
+            <p class="error" id="consent-email-error">{{icon:alert-circle}}<span class="error-text">Please check this box to continue.</span></p>
+          </div>
+
+          <div class="check">
+            <input type="checkbox" id="consent-sms" name="consentSms" required aria-describedby="consent-sms-error">
+            <label for="consent-sms">By checking this box, you agree to receive SMS messages from Longevity
+              Neurology Center related to appointment reminders, confirmation messages and service-related
+              notifications. Customers may also receive replies to support inquiries they initiate. The
+              average message frequency is 1–2 messages per month, though this may vary. Message and data
+              rates may apply. Reply STOP or UNSUBSCRIBE to unsubscribe, or HELP for assistance.
+              <span class="req" aria-hidden="true">*</span></label>
+            <p class="error" id="consent-sms-error">{{icon:alert-circle}}<span class="error-text">Please check this box to continue.</span></p>
+          </div>
+
+          <p class="muted" style="font-size:var(--f-sm);margin:0">
+            For more information, view our <a href="privacy-policy.html">Privacy Policy</a> and
+            <a href="sms-opt-in-policy.html">SMS Opt-In Policy</a>.
+          </p>
+
+          <button type="submit" class="btn btn--lg btn--block">{{icon:mail}}Submit</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt" aria-labelledby="map-title">
+  <div class="container">
+    <div class="section-head" data-reveal>
+      <p class="eyebrow">Find Us</p>
+      <h2 class="title-md serif" id="map-title">North Scottsdale, Arizona</h2>
+      <p class="lede">{{site.address_1line}}</p>
+    </div>
+    <div class="map-embed" data-reveal
+         data-map-src="{{site.maps_embed}}"
+         data-map-title="Map showing Longevity Neurology Center, 14362 N Frank Lloyd Wright Blvd, Suite 1340, Scottsdale AZ 85260">
+    </div>
+    <p class="mt-6">
+      <a class="btn btn--outline" href="{{site.maps_link}}" target="_blank" rel="noopener noreferrer">
+        {{icon:map-pin}}Open in Google Maps{{icon:external-link}}</a>
+    </p>
+  </div>
+</section>

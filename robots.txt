@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.longevityneurologycenter.com/sitemap.xml
+Sitemap: https://texasneurologyconsultants.com/sitemap.xml

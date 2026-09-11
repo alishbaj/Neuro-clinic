@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Static site builder for Longevity Neurology Center.
+Static site builder for Texas Neurology Consultants (Alla Al-Habib, M.D.).
 
 Every page shares one shell (head, skip link, top bar, header, drawer, footer,
 back-to-top, mobile action bar) so navigation and metadata can never drift
@@ -24,38 +24,44 @@ PAGES_DIR = SRC / "pages"
 
 # --------------------------------------------------------------------- site
 SITE = {
-    "name": "Longevity Neurology Center",
-    "short": "Longevity Neurology Center",
-    "tagline": "Comprehensive & Preventive Neurological Care Tailored to You",
-    "origin": "https://www.longevityneurologycenter.com",
-    "phone": "480-770-0427",
-    "phone_href": "+14807700427",
-    "fax": "480-770-0428",
-    "email": "info@longevityneurologycenter.com",
-    "street": "14362 North Frank Lloyd Wright Blvd, Suite 1340",
-    "city": "Scottsdale",
-    "state": "AZ",
-    "zip": "85260",
-    "booking": "https://ecarehub.health/book-appointment-landing-page?practiceId=6895fc2fd4ca9aa71a9fba9f&version=new",
+    "name": "Texas Neurology Consultants",
+    "short": "Texas Neurology Consultants",
+    "legal": "Texas Neurology Consultants, PLLC",
+    "doctor": "Alla Al-Habib, M.D.",
+    "doctor_short": "Dr. Al-Habib",
+    "tagline": "Compassionate Care from Day One",
+    "origin": "https://texasneurologyconsultants.com",
+    "phone": "(972) 403-3100",
+    "phone_href": "+19724033100",
+    "fax": "(972) 403-3105",
+    "street": "6124 West Parker Road, Suite 432",
+    "building": "Medical Office Building 3",
+    "city": "Plano",
+    "state": "TX",
+    "zip": "75093",
+    "booking": "https://texasneurologyconsultants.com/book-an-appointment/",
+    "portal": "https://mycw27.eclinicalweb.com/portal2567/jsp/100mp/login_otp.jsp",
     "maps_embed": (
-        "https://www.google.com/maps?q=14362+N+Frank+Lloyd+Wright+Blvd+Suite+1340,"
-        "+Scottsdale,+AZ+85260&output=embed"
+        "https://www.google.com/maps?q=6124+West+Parker+Road+Suite+432,"
+        "+Plano,+TX+75093&output=embed"
     ),
     "maps_link": (
         "https://www.google.com/maps/search/?api=1&query="
-        "14362+N+Frank+Lloyd+Wright+Blvd+Suite+1340%2C+Scottsdale%2C+AZ+85260"
+        "6124+West+Parker+Road+Suite+432%2C+Plano%2C+TX+75093"
     ),
-    "socials": [
-        ("Instagram", "instagram", "https://www.instagram.com/longevityneurologycenter?igsh=NTc4MTIwNjQ2YQ=="),
-        ("Facebook", "facebook", "https://www.facebook.com/p/Longevity-Neurology-Center-LLC-61579656184877/"),
-        ("LinkedIn", "linkedin", "https://www.linkedin.com/company/longevity-neurology-center"),
-        ("YouTube", "youtube", "https://www.youtube.com/@longevityneurologycenter"),
-        ("TikTok", "tiktok", "https://www.tiktok.com/@longevityneurologycenter"),
-    ],
+    # The practice publishes no email address or social accounts — patients reach
+    # us by phone, through the patient portal, or in person. Nothing is invented here.
+    "socials": [],
 }
 SITE["address_1line"] = f'{SITE["street"]}, {SITE["city"]} {SITE["state"]} {SITE["zip"]}'
 
-HOURS = [("Monday – Friday", "9:00 AM – 4:30 PM"), ("Saturday", "By Appointment Only"), ("Sunday", "Closed")]
+HOURS = [
+    ("Monday \u2013 Thursday", "8:00 AM \u2013 4:30 PM"),
+    ("Friday", "8:00 AM \u2013 12:00 PM"),
+    ("Saturday & Sunday", "Closed"),
+]
+HOURS_NOTE = ("The office closes for lunch from 12:00 PM to 1:00 PM. "
+              "Not all physicians are in the office on Fridays.")
 
 # ------------------------------------------------------------------ icon set
 # Lucide-style 24×24 stroke icons + Simple-Icons brand glyphs. No emoji anywhere.
@@ -192,11 +198,11 @@ NAV = [
     {"label": "Home", "href": "index.html"},
     {
         "label": "About",
-        "href": "about-longevityneurologycenter.html",
+        "href": "about-texas-neurology-consultants.html",
         "children": [
-            ("About the Center", "about-longevityneurologycenter.html"),
-            ("Our Philosophy of Care", "longevity-neurology-center.html"),
-            ("Dr. Tasha Powell", "dr-tasha-powell.html"),
+            ("About the Practice", "about-texas-neurology-consultants.html"),
+            ("Our Approach to Care", "approach-to-care.html"),
+            ("Alla Al-Habib, M.D.", "dr-alla-al-habib.html"),
         ],
     },
     {"label": "Services", "href": "services.html"},
@@ -261,11 +267,11 @@ def topbar() -> str:
   <div class="container topbar__inner">
     <div class="topbar__group">
       <a href="tel:{SITE['phone_href']}">{icon('phone')}<span>Tel: {SITE['phone']}</span></a>
-      <a class="topbar__hide-sm" href="mailto:{SITE['email']}">{icon('mail')}<span>{SITE['email']}</span></a>
+      <span class="topbar__hide-sm" style="opacity:.75">{icon('printer')}<span>Fax: {SITE['fax']}</span></span>
     </div>
     <div class="topbar__group">
-      <span class="topbar__hide-sm" style="opacity:.75">Scottsdale, Arizona &middot; In-person &amp; Telehealth</span>
-      <div class="topbar__socials">{social_links('topbar')}</div>
+      <span class="topbar__hide-sm" style="opacity:.75">{SITE['city']}, Texas &middot; {SITE['building']}</span>
+      <a href="{SITE['portal']}" target="_blank" rel="noopener noreferrer">{icon('external-link')}<span>Patient Portal</span></a>
     </div>
   </div>
 </div>"""
@@ -276,8 +282,8 @@ def header() -> str:
 <header class="site-header">
   <nav class="container nav" data-nav aria-label="Primary">
     <a class="brand" href="index.html" aria-label="{SITE['name']} — home">
-      <!-- 423x160 source shown at ~137px wide, so 1x already exceeds 2x density. -->
-      <img src="assets/img/logo-wordmark-dark.png" width="423" height="160" alt="{SITE['name']}">
+      <!-- 780x160 source shown at ~253px wide, so 1x already exceeds 1.5x density. -->
+      <img src="assets/img/logo-wordmark-dark.png" width="780" height="160" alt="{SITE['name']}">
     </a>
     {desktop_nav()}
     <div class="nav__cta">
@@ -294,7 +300,7 @@ def header() -> str:
 <div class="drawer-scrim"></div>
 <div class="drawer" id="site-drawer" role="dialog" aria-modal="true" aria-label="Site menu" data-nav>
   <div class="drawer__head">
-    <img src="assets/img/logo-wordmark-dark.png" width="423" height="160" alt="{SITE['name']}">
+    <img src="assets/img/logo-wordmark-dark.png" width="780" height="160" alt="{SITE['name']}">
     <button type="button" class="drawer__close" data-drawer-close aria-label="Close menu">{icon('x')}</button>
   </div>
   <div class="drawer__body">
@@ -306,7 +312,7 @@ def header() -> str:
     </a>
     <p class="drawer__contact">
       <a href="tel:{SITE['phone_href']}">{SITE['phone']}</a><br>
-      <a href="mailto:{SITE['email']}">{SITE['email']}</a>
+      <a href="{SITE['portal']}" target="_blank" rel="noopener noreferrer">Patient Portal</a>
     </p>
   </div>
 </div>"""
@@ -320,9 +326,9 @@ def footer() -> str:
         f'<li><a href="{href}">{label}</a></li>'
         for label, href in [
             ("Home", "index.html"),
-            ("About the Center", "about-longevityneurologycenter.html"),
-            ("Our Philosophy of Care", "longevity-neurology-center.html"),
-            ("Dr. Tasha Powell", "dr-tasha-powell.html"),
+            ("About the Practice", "about-texas-neurology-consultants.html"),
+            ("Our Approach to Care", "approach-to-care.html"),
+            ("Alla Al-Habib, M.D.", "dr-alla-al-habib.html"),
             ("Services", "services.html"),
             ("Patient Resources", "patient-resources.html"),
             ("Blog", "blog.html"),
@@ -333,15 +339,16 @@ def footer() -> str:
 <footer class="site-footer">
   <div class="container footer__top">
     <div class="footer__brand">
-      <img src="assets/img/logo-wordmark.png" width="423" height="160" alt="{SITE['name']}">
-      <p>A concierge neurology practice in Scottsdale, Arizona — individualized care focused on
-         lifestyle, nutrition and prevention, in person and by telehealth.</p>
-      <div class="footer__socials">{social_links('footer')}</div>
+      <img src="assets/img/logo-wordmark.png" width="780" height="160" alt="{SITE['name']}">
+      <p>A physician-owned, independent neurology practice in Plano, Texas. Dr. Alla Al-Habib is a
+         triple board-certified neurologist caring for patients across North Dallas and the wider
+         DFW area.</p>
     </div>
 
     <div>
       <h2 class="footer__title">Office Hours</h2>
       <ul class="hours">{hours}</ul>
+      <p style="margin-top:1rem;font-size:var(--f-xs);opacity:.8">{HOURS_NOTE}</p>
     </div>
 
     <div>
@@ -352,10 +359,11 @@ def footer() -> str:
     <div>
       <h2 class="footer__title">Contact Us</h2>
       <ul class="footer__list">
-        <li><a href="{SITE['maps_link']}" target="_blank" rel="noopener noreferrer">{SITE['address_1line']}</a></li>
-        <li><a href="mailto:{SITE['email']}">{SITE['email']}</a></li>
+        <li><a href="{SITE['maps_link']}" target="_blank" rel="noopener noreferrer">
+            {SITE['street']}<br>{SITE['building']}<br>{SITE['city']}, {SITE['state']} {SITE['zip']}</a></li>
         <li><a href="tel:{SITE['phone_href']}">Tel: {SITE['phone']}</a></li>
         <li>Fax: {SITE['fax']}</li>
+        <li><a href="{SITE['portal']}" target="_blank" rel="noopener noreferrer">Patient Portal</a></li>
       </ul>
       <p style="margin-top:1.25rem">
         <a class="btn btn--gold btn--sm" href="{SITE['booking']}" target="_blank" rel="noopener noreferrer">
@@ -375,7 +383,7 @@ def footer() -> str:
   </div>
 
   <div class="container footer__bottom">
-    <p style="margin:0">&copy; <span data-year>2025</span> {SITE['name']}. All Rights Reserved.</p>
+    <p style="margin:0">&copy; <span data-year>2025</span> {SITE['legal']}. All Rights Reserved.</p>
     <ul class="footer__legal">
       <li><a href="terms-and-conditions.html">Terms &amp; Conditions</a></li>
       <li><a href="privacy-policy.html">Privacy Policy</a></li>
@@ -401,17 +409,16 @@ def structured_data(page) -> str:
         "name": SITE["name"],
         "url": SITE["origin"] + "/",
         "logo": SITE["origin"] + "/assets/img/logo-wordmark.png",
-        "image": SITE["origin"] + "/assets/img/hero-reception.jpg",
-        "description": "Concierge preventive neurology practice in Scottsdale, Arizona led by "
-                       "Dr. Tasha Powell, MD — individualized care focused on lifestyle, nutrition and prevention.",
+        "image": SITE["origin"] + "/assets/img/waiting-room.jpg",
+        "description": "Physician-owned neurology practice in Plano, Texas. Alla Al-Habib, M.D. is a "
+                       "triple board-certified neurologist with special interest in stroke and headache medicine.",
         "telephone": SITE["phone"],
         "faxNumber": SITE["fax"],
-        "email": SITE["email"],
         "medicalSpecialty": "Neurologic",
-        "priceRange": "$$$",
+        "priceRange": "$$",
         "address": {
             "@type": "PostalAddress",
-            "streetAddress": SITE["street"],
+            "streetAddress": f'{SITE["street"]}, {SITE["building"]}',
             "addressLocality": SITE["city"],
             "addressRegion": SITE["state"],
             "postalCode": SITE["zip"],
@@ -420,19 +427,31 @@ def structured_data(page) -> str:
         "openingHoursSpecification": [
             {
                 "@type": "OpeningHoursSpecification",
-                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
-                "opens": "09:00",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday"],
+                "opens": "08:00",
                 "closes": "16:30",
-            }
+            },
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Friday"],
+                "opens": "08:00",
+                "closes": "12:00",
+            },
         ],
-        "sameAs": [url for _, _, url in SITE["socials"]],
-        "founder": {
+        "employee": {
             "@type": "Physician",
-            "name": "Tasha Powell, MD",
+            "name": "Alla Al-Habib, M.D.",
             "jobTitle": "Board Certified Neurologist",
             "medicalSpecialty": "Neurologic",
+            "alumniOf": [
+                {"@type": "EducationalOrganization", "name": "Jordan University of Science and Technology"},
+                {"@type": "EducationalOrganization", "name": "Baylor College of Medicine"},
+                {"@type": "EducationalOrganization", "name": "Washington University in St. Louis"},
+            ],
         },
     }
+    if SITE["socials"]:
+        business["sameAs"] = [url for _, _, url in SITE["socials"]]
     blocks = [business]
     if page.get("post"):
         p = POST_BY_SLUG[page["post"]]
@@ -445,7 +464,7 @@ def structured_data(page) -> str:
                 "image": f'{SITE["origin"]}/assets/img/{p["img"]}.jpg',
                 "datePublished": p["iso"],
                 "dateModified": p["iso"],
-                "author": {"@type": "Person", "name": "Tasha Powell, MD"},
+                "author": {"@type": "Person", "name": "Alla Al-Habib, M.D."},
                 "publisher": {"@type": "Organization", "name": SITE["name"]},
                 "mainEntityOfPage": SITE["origin"] + "/post/" + p["slug"],
             }
@@ -479,7 +498,7 @@ LAYOUT = """<!DOCTYPE html>
 <title>{title}</title>
 <meta name="description" content="{description}">
 <link rel="canonical" href="{canonical}">
-<meta name="theme-color" content="#221153">
+<meta name="theme-color" content="#1d3a72">
 <meta name="robots" content="index, follow">
 
 <meta property="og:type" content="{og_type}">
@@ -542,115 +561,125 @@ PAGES = [
     {
         "slug": "index",
         "path": "/",
-        "title": "Longevity Neurology Center | Concierge Preventive Neurology in Scottsdale, AZ",
-        "description": "Concierge neurology practice in Scottsdale, Arizona. Comprehensive and preventive "
-                       "neurological care tailored to you, led by Dr. Tasha Powell, MD. In-person and telehealth.",
-        "og_image": "hero-reception.jpg",
+        "title": "Alla Al-Habib, M.D. | Board Certified Neurologist in Plano, TX",
+        "description": "Alla Al-Habib, M.D. is a triple board-certified neurologist at Texas Neurology "
+                       "Consultants in Plano, Texas, with special interest in stroke and headache medicine.",
+        "og_image": "waiting-room.jpg",
         "faq": [
-            ("Do I need a referral to see Dr. Powell?",
-             "No, a referral is not required to schedule an appointment at Longevity Neurology Center."),
-            ("What is “preventive neurology”?",
-             "Preventive neurology focuses on identifying individuals at risk for neurological disorders and "
-             "implementing strategies (lifestyle, nutrition, early interventions) to prevent or delay the onset "
-             "of these conditions, rather than just treating them after they appear."),
-            ("What if I need tests like an MRI or blood work?",
-             "Dr. Powell can order any necessary tests. These tests (labs, imaging, EMG/NCS, EEG, etc.) will be "
-             "performed at external facilities and billed to your insurance by those facilities, just like from "
-             "any other doctor's office."),
-            ("What is a superbill and how does insurance reimbursement work?",
-             "Patients will be provided with a detailed superbill after each visit. This document includes the "
-             "necessary diagnostic and procedure codes and can be submitted to your insurance company for "
-             "potential out-of-network reimbursement. Reimbursement depends on your individual plan and coverage, "
-             "and payment for services is due at the time of your appointment."),
+            ("Do I need a referral to see Dr. Al-Habib?",
+             "It depends on your insurance plan. Some plans require a referral from your primary care "
+             "physician before a neurology visit; others do not. Please check with your plan before you "
+             "schedule, and call our office at (972) 403-3100 if you are unsure."),
+            ("What insurance do you accept?",
+             "We accept most major insurance plans, including Medicare. We do not accept Medicaid or "
+             "Medicare/Medicaid replacement plans. Please call the office to confirm that we are in "
+             "network with your specific plan before your appointment."),
+            ("What should I bring to my first appointment?",
+             "Bring a government-issued photo ID, your insurance and pharmacy benefit cards, a referral "
+             "authorization if your plan requires one, a complete list of your medications with strength, "
+             "dose and frequency, any recent lab results or imaging reports, and a medical power of "
+             "attorney if one applies. If your registration packet is not finished in advance, please "
+             "arrive 30 to 45 minutes early."),
+            ("Which conditions does Dr. Al-Habib treat?",
+             "Dr. Al-Habib provides general adult neurology care, including stroke and cerebrovascular "
+             "disease, headaches and migraines, epilepsy and seizure disorders, neuropathy, memory "
+             "concerns, Parkinson's disease, tremor and other movement disorders, multiple sclerosis and "
+             "carpal tunnel syndrome. She is triple board certified, with a special interest in stroke "
+             "and headache medicine."),
+            ("Is diagnostic testing done in the office?",
+             "Yes. We perform EEG, ambulatory EEG, EMG/nerve conduction studies, sleep studies and "
+             "NeuroTrax cognitive testing. Imaging such as MRI or CT is arranged at an outside facility "
+             "and billed to your insurance by that facility."),
         ],
     },
     {
-        "slug": "about-longevityneurologycenter",
-        "path": "/about-longevityneurologycenter",
-        "title": "About Longevity Neurology Center | Concierge Neurology in Scottsdale, AZ",
-        "description": "A concierge neurology practice in Scottsdale, Arizona offering individualized care "
-                       "focused on lifestyle, nutrition and prevention.",
-        "og_image": "reception-desk.jpg",
+        "slug": "about-texas-neurology-consultants",
+        "path": "/about-texas-neurology-consultants",
+        "title": "About Texas Neurology Consultants | Neurology Practice in Plano, TX",
+        "description": "A physician-owned, independent neurology practice serving DFW since 2003 \u2014 "
+                       "diagnosis and treatment of disorders of the brain, spinal cord, nerves and muscles.",
+        "og_image": "waiting-room.jpg",
     },
     {
-        "slug": "longevity-neurology-center",
-        "path": "/longevity-neurology-center",
-        "title": "Our Philosophy of Care | Longevity Neurology Center, Scottsdale AZ",
-        "description": "A shift to proactive, personalized neurological care — the fee-for-service model behind "
-                       "Longevity Neurology Center in Scottsdale, Arizona.",
+        "slug": "approach-to-care",
+        "path": "/approach-to-care",
+        "title": "Our Approach to Care | Texas Neurology Consultants, Plano TX",
+        "description": "Careful history, a thorough neurological exam and the right test at the right "
+                       "time \u2014 how Dr. Alla Al-Habib approaches a new neurology consultation.",
         "og_image": "consult-couple.jpg",
     },
     {
-        "slug": "dr-tasha-powell",
-        "path": "/dr-tasha-powell",
-        "title": "Tasha Powell, MD | Board Certified Neurologist in Scottsdale, Arizona",
-        "description": "Meet Dr. Tasha Powell, MD — founder and CEO of Longevity Neurology Center, with over "
-                       "20 years of experience and a focus on preventive neurology.",
-        "og_image": "dr-powell-clinic.jpg",
+        "slug": "dr-alla-al-habib",
+        "path": "/dr-alla-al-habib",
+        "title": "Alla Al-Habib, M.D. | Triple Board Certified Neurologist, Plano TX",
+        "description": "Meet Alla Al-Habib, M.D. \u2014 board certified in neurology and vascular/stroke "
+                       "neurology, UCNS certified in headache medicine, trained at Baylor and WashU.",
+        "og_image": "dr-alhabib-portrait.jpg",
     },
     {
         "slug": "services",
         "path": "/services",
-        "title": "Neurology Services | Longevity Neurology Center, Scottsdale AZ",
-        "description": "Preventive consultations, diagnosis and management of neurological conditions, "
-                       "therapeutic injections, and lifestyle and nutritional neurology in Scottsdale, Arizona.",
+        "title": "Neurology Services & Diagnostics | Texas Neurology Consultants, Plano TX",
+        "description": "Stroke, headache and migraine, epilepsy, neuropathy, memory, movement disorders "
+                       "and MS \u2014 plus in-office EEG, EMG/NCS, sleep studies and cognitive testing.",
         "og_image": "neuro-exam.jpg",
     },
     {
         "slug": "patient-resources",
         "path": "/patient-resources",
-        "title": "Patient Resources | Longevity Neurology Center, Scottsdale AZ",
-        "description": "What to bring to your first appointment, insurance and pricing information, superbills, "
-                       "and the upcoming concierge annual membership.",
+        "title": "Patient Resources | Texas Neurology Consultants, Plano TX",
+        "description": "New patient forms, what to bring to your first visit, insurance and billing, "
+                       "medical records requests and the patient portal.",
         "og_image": "waiting-room.jpg",
     },
     {
         "slug": "blog",
         "path": "/blog",
-        "title": "Neurology Educational Blog | Longevity Neurology Center",
-        "description": "Brain health education from Dr. Tasha Powell — prevention, nutrition, cognition and "
-                       "neurological conditions explained.",
+        "title": "Neurology Blog | Texas Neurology Consultants",
+        "description": "Plain-language neurology education from Dr. Alla Al-Habib \u2014 stroke, headache, "
+                       "memory and the conditions we see most often in clinic.",
         "og_image": "blog-skip.jpg",
     },
     {
         "slug": "contact",
         "path": "/contact",
-        "title": "Contact Longevity Neurology Center | Scottsdale, Arizona Neurologist",
-        "description": "Call 480-770-0427, email info@longevityneurologycenter.com, or send a message. "
-                       "14362 N Frank Lloyd Wright Blvd, Suite 1340, Scottsdale AZ 85260.",
-        "og_image": "clinic-entrance.jpg",
+        "title": "Contact Texas Neurology Consultants | Plano, TX Neurologist",
+        "description": "Call (972) 403-3100 or visit us at 6124 West Parker Road, Suite 432, Medical "
+                       "Office Building 3, Plano TX 75093. Fax (972) 403-3105.",
+        "og_image": "office.jpg",
     },
     {
         "slug": "privacy-policy",
         "path": "/privacy-policy",
-        "title": "Privacy Policy | Longevity Neurology Center",
-        "description": "How Longevity Neurology Center collects, uses and protects the information you share "
-                       "with us.",
-        "og_image": "reception-desk.jpg",
+        "title": "Privacy Policy | Texas Neurology Consultants",
+        "description": "How Texas Neurology Consultants collects, uses and protects the information you "
+                       "share with us.",
+        "og_image": "office.jpg",
         "robots": "noindex, follow",
     },
     {
         "slug": "terms-and-conditions",
         "path": "/terms-and-conditions",
-        "title": "Terms & Conditions | Longevity Neurology Center",
-        "description": "The terms that govern your use of the Longevity Neurology Center website.",
-        "og_image": "reception-desk.jpg",
+        "title": "Terms & Conditions | Texas Neurology Consultants",
+        "description": "The terms that govern your use of the Texas Neurology Consultants website.",
+        "og_image": "office.jpg",
         "robots": "noindex, follow",
     },
     {
         "slug": "sms-opt-in-policy",
         "path": "/sms-opt-in-policy",
-        "title": "SMS Opt-In Policy | Longevity Neurology Center",
-        "description": "How our SMS programme works: consent, message frequency, rates, and how to opt out.",
-        "og_image": "reception-desk.jpg",
+        "title": "SMS Opt-In Policy | Texas Neurology Consultants",
+        "description": "How our appointment text messaging works: consent, message frequency, rates, and "
+                       "how to opt out.",
+        "og_image": "office.jpg",
         "robots": "noindex, follow",
     },
     {
         "slug": "404",
         "path": "/404",
-        "title": "Page Not Found | Longevity Neurology Center",
-        "description": "That page could not be found. Explore our services, meet Dr. Powell, or get in touch.",
-        "og_image": "reception-desk.jpg",
+        "title": "Page Not Found | Texas Neurology Consultants",
+        "description": "That page could not be found. Explore our services, meet Dr. Al-Habib, or get in touch.",
+        "og_image": "office.jpg",
         "robots": "noindex, nofollow",
     },
 ]
@@ -664,12 +693,12 @@ POSTS = [
         "date": "14 August 2026", "iso": "2026-08-14", "read": "5 min read",
         "topic": "Brain Health",
         "img": "blog-skip", "alt": "Two women celebrating together after exercising",
-        "excerpt": "Most of my patients over 60 can’t skip. Not won’t — can’t. That single test tells me "
+        "excerpt": "Most of my patients over 60 can\u2019t skip. Not won\u2019t \u2014 can\u2019t. That single test tells me "
                    "more about brain health than almost any other quick screen I can do in an exam room.",
     },
     {
         "slug": "up-to-70-of-dementia-is-preventable-the-8-things-that-matter-most-for-your-brain",
-        "title": "Up to 70% of Dementia Is Preventable — The 8 Things That Matter Most for Your Brain",
+        "title": "Up to 70% of Dementia Is Preventable \u2014 The 8 Things That Matter Most for Your Brain",
         "date": "9 July 2026", "iso": "2026-07-09", "read": "8 min read", "updated": "14 August 2026",
         "topic": "Prevention",
         "img": "consult-desk", "alt": "A neurologist reviewing dementia risk factors with two patients",
@@ -677,36 +706,35 @@ POSTS = [
                    "population level through modification of eight key lifestyle and health factors.",
     },
     {
-        "slug": "what-are-the-benefits-of-preventive-brain-health-services-longevity-neurology-center",
-        "title": "What Are the Benefits of Preventive Brain Health Services?",
-        "date": "23 June 2026", "iso": "2026-06-23", "read": "4 min read",
-        "topic": "Prevention",
-        "img": "neuro-exam", "alt": "A clinician performing a neurological reflex examination",
-        "excerpt": "Preventive brain health services help detect cognitive changes early, identify personal "
-                   "risk factors, and create a customized plan to protect memory and thinking skills — "
-                   "often years before symptoms appear.",
+        "slug": "recognizing-a-stroke-be-fast-and-why-every-minute-counts",
+        "title": "Recognizing a Stroke: BE FAST, and Why Every Minute Counts",
+        "date": "23 June 2026", "iso": "2026-06-23", "read": "6 min read",
+        "topic": "Stroke",
+        "img": "consult-exam", "alt": "A neurologist performing a bedside neurological examination",
+        "excerpt": "An untreated large-vessel stroke destroys roughly 1.9 million neurons a minute. "
+                   "Knowing the six warning signs \u2014 and calling 911 instead of driving \u2014 changes outcomes.",
     },
     {
         "slug": "5-rare-neurological-conditions-that-sound-fictional-but-are-very-real",
-        "title": "5 Rare Neurological Conditions That Sound Fictional — But Are Very Real",
+        "title": "5 Rare Neurological Conditions That Sound Fictional \u2014 But Are Very Real",
         "date": "14 May 2026", "iso": "2026-05-14", "read": "6 min read", "updated": "18 May 2026",
         "topic": "Conditions",
-        "img": "clinician-tablet", "alt": "A clinician reviewing a patient’s notes on a tablet",
-        "excerpt": "In neurology, the word “interesting” isn’t a compliment. It usually means rare, complex "
-                   "— and difficult to treat. Five real conditions that sound like fiction.",
+        "img": "clinician-tablet", "alt": "A clinician reviewing a patient\u2019s notes on a tablet",
+        "excerpt": "In neurology, the word \u201cinteresting\u201d isn\u2019t a compliment. It usually means rare, complex "
+                   "\u2014 and difficult to treat. Five real conditions that sound like fiction.",
     },
     {
-        "slug": "how-fermented-foods-influence-brain-health-through-the-gut-microbiome",
-        "title": "How Fermented Foods Influence Brain Health Through the Gut Microbiome",
-        "date": "9 April 2026", "iso": "2026-04-09", "read": "4 min read",
-        "topic": "Nutrition",
-        "img": "nutrition-citrus", "alt": "Fresh citrus and whole foods arranged on a kitchen counter",
-        "excerpt": "In modern neurology we increasingly recognise that many neurological processes begin "
-                   "long before symptoms appear — and the gut is one of the places they start.",
+        "slug": "migraine-or-tension-headache-how-a-specialist-tells-the-difference",
+        "title": "Migraine or Tension Headache? How a Specialist Tells the Difference",
+        "date": "9 April 2026", "iso": "2026-04-09", "read": "5 min read",
+        "topic": "Headache",
+        "img": "burnout-laptop", "alt": "A person pinching the bridge of their nose at a laptop",
+        "excerpt": "\u201cJust a bad headache\u201d is the phrase I hear most often from people who turn out to have "
+                   "migraine. The distinction is not academic \u2014 it changes the entire treatment plan.",
     },
     {
         "slug": "a-neurologist-s-guide-to-understanding-amyotrophic-lateral-sclerosis-als",
-        "title": "A Neurologist’s Guide to Understanding Amyotrophic Lateral Sclerosis (ALS)",
+        "title": "A Neurologist\u2019s Guide to Understanding Amyotrophic Lateral Sclerosis (ALS)",
         "date": "14 March 2026", "iso": "2026-03-14", "read": "2 min read",
         "topic": "Conditions",
         "img": "patient-education", "alt": "A neurologist explaining a diagnosis to a patient",
@@ -755,8 +783,8 @@ def post_page_body(post: dict) -> str:
       </ol>
     </nav>
     <h1 class="hero__title serif" id="post-title" style="text-transform:none;letter-spacing:0">{post['title']}</h1>
-    <p class="post-card__meta" style="color:#e8cd8b">
-      <span>Dr. Tasha Powell, MD</span><span>{post['date']}</span><span>{post['read']}</span>{updated}
+    <p class="post-card__meta" style="color:#a9d4ee">
+      <span>Alla Al-Habib, M.D.</span><span>{post['date']}</span><span>{post['read']}</span>{updated}
     </p>
   </div>
 </section>
@@ -768,13 +796,13 @@ def post_page_body(post: dict) -> str:
 
   <div class="container container--narrow mt-7">
     <aside class="card" style="flex-direction:row;gap:1.5rem;align-items:center;flex-wrap:wrap">
-      <div style="flex:0 0 96px">{img('dr-powell-studio', 'Dr. Tasha Powell', 'avatar', '96px')}</div>
+      <div style="flex:0 0 96px">{img('dr-alhabib-portrait', 'Alla Al-Habib, M.D.', 'avatar', '96px')}</div>
       <div style="flex:1 1 260px">
         <p class="eyebrow" style="margin-bottom:.35rem">Written by</p>
-        <h2 class="title-sm" style="margin-bottom:.35rem">Dr. Tasha Powell, MD</h2>
-        <p style="margin-bottom:.75rem">Board certified neurologist and founder of Longevity Neurology Center,
-           with over 20 years of experience and a focus on preventive neurology.</p>
-        <a class="link-arrow" href="dr-tasha-powell.html">Read her full biography{icon('arrow-right')}</a>
+        <h2 class="title-sm" style="margin-bottom:.35rem">Alla Al-Habib, M.D.</h2>
+        <p style="margin-bottom:.75rem">Triple board-certified neurologist at Texas Neurology Consultants in
+           Plano, Texas, with a special interest in stroke and headache medicine.</p>
+        <a class="link-arrow" href="dr-alla-al-habib.html">Read her full biography{icon('arrow-right')}</a>
       </div>
     </aside>
   </div>
@@ -792,13 +820,14 @@ def post_page_body(post: dict) -> str:
 </section>
 
 <section class="cta-band section on-ink" aria-labelledby="post-cta">
-  <div class="cta-band__media">{img('clinic-entrance', 'The entrance to Longevity Neurology Center')}</div>
+  <div class="cta-band__media">{img('consult-couple', 'A neurologist in conversation with two patients')}</div>
   <div class="cta-band__scrim"></div>
   <div class="container cta-band__inner">
     <div>
       <p class="eyebrow">Ready When You Are</p>
-      <h2 class="title-md serif" id="post-cta">Take the next step for your brain health</h2>
-      <p class="lede">No referral needed. In-person appointments in Scottsdale and telehealth across Arizona.</p>
+      <h2 class="title-md serif" id="post-cta">Talk it through with a neurologist</h2>
+      <p class="lede">Appointments with Dr. Al-Habib at our Plano office. Call
+        <a href="tel:{SITE['phone_href']}" style="color:inherit">{SITE['phone']}</a> to get started.</p>
     </div>
     <div class="cluster">
       <a class="btn btn--gold btn--lg" href="{SITE['booking']}" target="_blank" rel="noopener noreferrer">
@@ -813,7 +842,7 @@ for _p in POSTS:
         {
             "slug": _p["slug"],
             "path": "/post/" + _p["slug"],
-            "title": f'{_p["title"]} | Longevity Neurology Center',
+            "title": f'{_p["title"]} | Texas Neurology Consultants',
             "description": re.sub(r"\s+", " ", _p["excerpt"])[:300],
             "og_image": f'{_p["img"]}.jpg',
             "post": _p["slug"],
@@ -909,12 +938,12 @@ def build() -> int:
         json.dumps(
             {
                 "name": SITE["name"],
-                "short_name": "Longevity Neuro",
+                "short_name": "Texas Neuro",
                 "description": SITE["tagline"],
                 "start_url": "./index.html",
                 "display": "standalone",
                 "background_color": "#ffffff",
-                "theme_color": "#221153",
+                "theme_color": "#1d3a72",
                 "icons": [
                     {"src": "assets/img/logo-mark-512.png", "sizes": "512x512", "type": "image/png"},
                     {"src": "assets/img/apple-touch-icon.png", "sizes": "180x180", "type": "image/png"},

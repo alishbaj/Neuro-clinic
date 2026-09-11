@@ -1,11 +1,11 @@
 {
-  "name": "Longevity Neurology Center",
-  "short_name": "Longevity Neuro",
-  "description": "Comprehensive & Preventive Neurological Care Tailored to You",
+  "name": "Texas Neurology Consultants",
+  "short_name": "Texas Neuro",
+  "description": "Compassionate Care from Day One",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#ffffff",
-  "theme_color": "#221153",
+  "theme_color": "#1d3a72",
   "icons": [
     {
       "src": "assets/img/logo-mark-512.png",

@@ -1,5 +1,5 @@
 /* =============================================================================
-   Longevity Neurology Center — site behaviour
+   Texas Neurology Consultants — site behaviour
    Progressive enhancement: every feature checks for its own markup first and
    the page remains fully usable with JS disabled.
    ========================================================================== */
@@ -394,33 +394,19 @@
         return;
       }
 
-      // No backend is wired up on this static build — hand off to the practice
-      // inbox via a prefilled mail draft so the message is never silently lost.
+      // No backend is wired up on this static build, and the practice publishes no
+      // email address — so never pretend the message was sent. Point the visitor at
+      // the channels that actually reach the office.
       if (submit) { submit.classList.add('is-loading'); submit.setAttribute('aria-disabled', 'true'); }
 
       window.setTimeout(function () {
-        var data = new FormData(form);
-        var body = [
-          'Name: ' + (data.get('firstName') || '') + ' ' + (data.get('lastName') || ''),
-          'Email: ' + (data.get('email') || ''),
-          'Phone: ' + (data.get('phone') || 'Not provided'),
-          '',
-          'Message:',
-          data.get('comment') || '',
-          '',
-          '— Sent from longevityneurologycenter.com contact form'
-        ].join('\n');
-
-        window.location.href = 'mailto:info@longevityneurologycenter.com'
-          + '?subject=' + encodeURIComponent('Website enquiry from ' + (data.get('firstName') || 'a visitor'))
-          + '&body=' + encodeURIComponent(body);
-
         if (submit) { submit.classList.remove('is-loading'); submit.removeAttribute('aria-disabled'); }
         if (status) {
           status.className = 'form__status form__status--ok is-visible';
           $('.form__status-text', status).textContent =
-            'Thank you — your email app should now be open with your message ready to send. '
-            + 'If nothing opened, please email info@longevityneurologycenter.com directly.';
+            'This form is not yet connected. To reach the office, please call (972) 403-3100 during '
+            + 'opening hours, or send a secure message through the patient portal. '
+            + 'For a medical emergency, call 911.';
           status.focus();
         }
         form.reset();

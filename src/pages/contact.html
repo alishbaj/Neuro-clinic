@@ -1,5 +1,5 @@
 <section class="hero hero--page on-ink" aria-labelledby="page-title">
-  <div class="hero__media">{{img:clinic-entrance|A patient arriving at Longevity Neurology Center||100vw|eager}}</div>
+  <div class="hero__media">{{img:office|A consultation room at Texas Neurology Consultants||100vw|eager}}</div>
   <div class="hero__scrim"></div>
   <div class="container hero__inner">
     <nav class="crumbs" aria-label="Breadcrumb">
@@ -7,8 +7,8 @@
     </nav>
     <p class="eyebrow">Contact</p>
     <h1 class="hero__title serif" id="page-title" style="text-transform:none;letter-spacing:0">Contact us</h1>
-    <p class="hero__sub">We are here to answer your questions and help you begin your journey toward
-      optimal brain health.</p>
+    <p class="hero__sub">Call us today to schedule your appointment and start your journey to better
+      health.</p>
   </div>
 </section>
 
@@ -18,8 +18,10 @@
       {{icon:alert-circle}}
       <div>
         <h3>This form is for general inquiries only</h3>
-        <p>If you are experiencing a medical emergency, please dial <a href="tel:911"><strong>911</strong></a>
-          or go to the nearest emergency room.</p>
+        <p>If you are experiencing a medical emergency &mdash; including sudden weakness or numbness on
+          one side, trouble speaking or understanding, sudden vision loss, severe dizziness or a sudden
+          severe headache &mdash; dial <a href="tel:911"><strong>911</strong></a> or go to the nearest
+          emergency room. Do not wait for a reply and do not drive yourself.</p>
       </div>
     </div>
   </div>
@@ -28,7 +30,7 @@
 <section class="section" style="padding-top:0" aria-labelledby="details-title">
   <div class="container split" style="align-items:start">
     <div data-reveal>
-      <p class="eyebrow">Longevity Neurology Center</p>
+      <p class="eyebrow">Texas Neurology Consultants</p>
       <h2 class="title-md serif" id="details-title">Get in touch</h2>
       <hr class="rule-gold">
 
@@ -38,12 +40,8 @@
           <div><dl>
             <dt>Address</dt>
             <dd><a href="{{site.maps_link}}" target="_blank" rel="noopener noreferrer">
-              {{site.address_1line}}{{icon:external-link}}</a></dd>
+              {{site.street}}<br>{{site.building}}<br>{{site.city}}, {{site.state}} {{site.zip}}{{icon:external-link}}</a></dd>
           </dl></div>
-        </li>
-        <li>
-          <span class="info-list__icon">{{icon:mail}}</span>
-          <div><dl><dt>Email</dt><dd><a href="mailto:{{site.email}}">{{site.email}}</a></dd></dl></div>
         </li>
         <li>
           <span class="info-list__icon">{{icon:phone}}</span>
@@ -54,13 +52,27 @@
           <div><dl><dt>Fax</dt><dd>{{site.fax}}</dd></dl></div>
         </li>
         <li>
+          <span class="info-list__icon">{{icon:external-link}}</span>
+          <div><dl><dt>Patient Portal</dt>
+            <dd><a href="{{site.portal}}" target="_blank" rel="noopener noreferrer">Sign in to the portal</a></dd>
+          </dl></div>
+        </li>
+        <li>
+          <span class="info-list__icon">{{icon:file-text}}</span>
+          <div><dl><dt>Medical Records</dt>
+            <dd>HealthMark Group &middot; <a href="tel:+18006594035">1-800-659-4035</a></dd>
+          </dl></div>
+        </li>
+        <li>
           <span class="info-list__icon">{{icon:clock}}</span>
           <div><dl><dt>Office Hours</dt><dd>
             <ul class="hours" style="margin-top:.25rem">
-              <li><span class="day">Monday – Friday</span><span>9:00 AM – 4:30 PM</span></li>
-              <li><span class="day">Saturday</span><span>By Appointment Only</span></li>
-              <li><span class="day">Sunday</span><span>Closed</span></li>
+              <li><span class="day">Monday &ndash; Thursday</span><span>8:00 AM &ndash; 4:30 PM</span></li>
+              <li><span class="day">Friday</span><span>8:00 AM &ndash; 12:00 PM</span></li>
+              <li><span class="day">Saturday &amp; Sunday</span><span>Closed</span></li>
             </ul>
+            <p class="muted" style="font-size:var(--f-sm);margin-top:.6rem">The office closes for lunch
+              from 12:00 PM to 1:00 PM. Not all physicians are in the office on Fridays.</p>
           </dd></dl></div>
         </li>
       </ul>
@@ -76,7 +88,7 @@
       <div class="card" style="gap:var(--sp-5)">
         <div>
           <p class="eyebrow" style="margin-bottom:.5rem">Send a Message</p>
-          <h2 class="title-sm" style="margin-bottom:.5rem">Send a message to Longevity Neurology Center</h2>
+          <h2 class="title-sm" style="margin-bottom:.5rem">Send a message to Texas Neurology Consultants</h2>
           <p class="muted" style="font-size:var(--f-sm);margin:0">If you have any questions, concerns or
             comments, please fill out the short form below.</p>
         </div>
@@ -110,9 +122,9 @@
 
           <div class="field">
             <label for="phone">Phone</label>
-            <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="480-770-0427"
+            <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="972-403-3100"
                    aria-describedby="phone-hint phone-error">
-            <p class="hint" id="phone-hint">Optional — helpful if you would prefer a call back.</p>
+            <p class="hint" id="phone-hint">Optional &mdash; helpful if you would prefer a call back.</p>
             <p class="error" id="phone-error">{{icon:alert-circle}}<span class="error-text">Enter a valid phone number.</span></p>
           </div>
 
@@ -135,12 +147,12 @@
 
           <div class="check">
             <input type="checkbox" id="consent-sms" name="consentSms" required aria-describedby="consent-sms-error">
-            <label for="consent-sms">By checking this box, you agree to receive SMS messages from Longevity
-              Neurology Center related to appointment reminders, confirmation messages and service-related
-              notifications. Customers may also receive replies to support inquiries they initiate. The
-              average message frequency is 1–2 messages per month, though this may vary. Message and data
-              rates may apply. Reply STOP or UNSUBSCRIBE to unsubscribe, or HELP for assistance.
-              <span class="req" aria-hidden="true">*</span></label>
+            <label for="consent-sms">By checking this box, you agree to receive SMS messages from Texas
+              Neurology Consultants related to appointment reminders, confirmation messages and
+              service-related notifications. Customers may also receive replies to support inquiries they
+              initiate. The average message frequency is 1&ndash;2 messages per month, though this may
+              vary. Message and data rates may apply. Reply STOP or UNSUBSCRIBE to unsubscribe, or HELP
+              for assistance. <span class="req" aria-hidden="true">*</span></label>
             <p class="error" id="consent-sms-error">{{icon:alert-circle}}<span class="error-text">Please check this box to continue.</span></p>
           </div>
 
@@ -160,12 +172,12 @@
   <div class="container">
     <div class="section-head" data-reveal>
       <p class="eyebrow">Find Us</p>
-      <h2 class="title-md serif" id="map-title">North Scottsdale, Arizona</h2>
-      <p class="lede">{{site.address_1line}}</p>
+      <h2 class="title-md serif" id="map-title">Plano, Texas</h2>
+      <p class="lede">{{site.street}}, {{site.building}}, {{site.city}}, {{site.state}} {{site.zip}}</p>
     </div>
     <div class="map-embed" data-reveal
          data-map-src="{{site.maps_embed}}"
-         data-map-title="Map showing Longevity Neurology Center, 14362 N Frank Lloyd Wright Blvd, Suite 1340, Scottsdale AZ 85260">
+         data-map-title="Map showing Texas Neurology Consultants, 6124 West Parker Road, Suite 432, Plano TX 75093">
     </div>
     <p class="mt-6">
       <a class="btn btn--outline" href="{{site.maps_link}}" target="_blank" rel="noopener noreferrer">

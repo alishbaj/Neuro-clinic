@@ -18,11 +18,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Publish index.html to gh-pages
+      - name: Publish the site to gh-pages
         run: |
           set -euo pipefail
           rm -rf .publish && mkdir .publish
-          cp index.html .publish/
+          cp -R index.html support.js assets .publish/
           touch .publish/.nojekyll
           cd .publish
           git init -q -b gh-pages

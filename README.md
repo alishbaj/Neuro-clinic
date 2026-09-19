@@ -1,45 +1,36 @@
-# Neuro Longevity Care — homepage source
+# Neuro Longevity Care — website source
 
 **Live site:** https://alishbaj.github.io/Neuro-clinic/
 
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/alishbaj/Neuro-clinic?quickstart=1)
+Plain static HTML/CSS. No build step, no framework. Every push to `main`
+publishes to GitHub Pages via `.github/workflows/publish.yml`.
 
-## Run it locally
-
-You need Python 3 (preinstalled on macOS and most Linux) and nothing else.
-
+## Run locally
 ```sh
-git clone https://github.com/alishbaj/Neuro-clinic.git
-cd Neuro-clinic
-./serve.sh          # macOS / Linux
-serve.bat           # Windows
+./serve.sh      # macOS / Linux   (serve.bat on Windows)
 ```
+Open http://localhost:8000.
 
-Then open **http://localhost:8000**. Refresh the browser after editing a file.
-Use a different port with `./serve.sh 3000` / `serve.bat 3000`.
-
-The page has to be served over http — double-clicking `index.html` won't load
-the hero animation or scripts properly.
-
-### No local setup
-
-Click **Open in GitHub Codespaces** above. It starts the same server in the
-cloud and opens a preview of the site automatically.
+## Set the Elation links (the one file to edit after EHR onboarding)
+`config.js` holds the self-scheduling, bill-pay, forms and patient-portal
+URLs plus phone/email. Paste the links from Elation there; every
+"Book a Consultation", "Pay a Bill", "Complete Forms" and "Patient Portal"
+button across the site picks them up. Empty values fall back to the
+Contact page, so nothing is ever a broken link.
 
 ## Files
-- index.html — the page (markup + logic).
-- support.js — runtime the page loads. Must sit next to index.html.
-- page-logic.js — the page's JavaScript on its own (symptom data, booking
-  flow state, validation, FAQ accordion). Reference copy; the live copy is
-  the <script data-dc-script> block inside index.html.
-- assets/ — sunrise-loop.html (hero animation), photos.
-- serve.sh / serve.bat — start a local server on port 8000.
+- `*.html` — one file per page (home, neurology, second-opinions,
+  headache-migraine, stroke-prevention, brain-health, executive-brain-health,
+  family-care-navigation, professional-services, brain-mri, about, resources,
+  checklist, pricing, contact, legal, 404).
+- `assets/site.css` — all styles. `assets/site.js` — nav, link wiring, hero.
+- `assets/sunrise-loop.html` — hero animation (home only, loads after the page).
+- `sitemap.xml`, `robots.txt` — update the base URL in both (and the
+  `<link rel="canonical">` tags) when the practice gets its own domain.
 
-## Publishing
-Every push to `main` publishes the site to GitHub Pages via
-`.github/workflows/publish.yml`. No build step, no npm, no server code.
-
-## To edit
-Copy/text and inline styles are in the markup of index.html.
-Behaviour (symptoms, slots, states, validation) is in the
-`class Component` block at the bottom of that file.
+## Before launch (search for `TODO` in the HTML)
+- Fees on `pricing.html` (each "Fee published before launch" badge).
+- Phone/email in `config.js`.
+- Attorney-approved text on `legal.html`, the family-navigation scope note,
+  the Medicare and cancellation answers on `pricing.html`.
+- Publications / appointments on `about.html`, if any.

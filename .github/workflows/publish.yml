@@ -22,7 +22,7 @@ jobs:
         run: |
           set -euo pipefail
           rm -rf .publish && mkdir .publish
-          cp -R index.html support.js assets .publish/
+          cp -R *.html config.js sitemap.xml robots.txt assets .publish/
           touch .publish/.nojekyll
           cd .publish
           git init -q -b gh-pages

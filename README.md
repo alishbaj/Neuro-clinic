@@ -23,8 +23,10 @@ Contact page, so nothing is ever a broken link.
   headache-migraine, stroke-prevention, brain-health, executive-brain-health,
   family-care-navigation, professional-services, brain-mri, about, resources,
   checklist, pricing, contact, legal, 404).
-- `assets/site.css` — all styles. `assets/site.js` — nav, link wiring, hero.
-- `assets/sunrise-loop.html` — hero animation (home only, loads after the page).
+- `assets/site.css` — all styles (palette and fonts are the tokens at the top).
+  `assets/site.js` — nav and link wiring.
+- `assets/tatreez-*.svg`, `assets/olive-branch.svg` — stitched dividers and
+  the olive-branch hero art.
 - `sitemap.xml`, `robots.txt` — update the base URL in both (and the
   `<link rel="canonical">` tags) when the practice gets its own domain.
 

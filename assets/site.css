@@ -71,7 +71,9 @@ p{margin:0 0 1em}
 .brand > svg{width:80px;height:52px;flex:none}
 .wordmark{display:flex;flex-direction:column;line-height:1}
 .wordmark .name{font-family:var(--serif);font-size:27px;font-weight:600;letter-spacing:.01em;white-space:nowrap;color:#2F3E2E}
-.wordmark .sub{font-size:11px;letter-spacing:.46em;text-transform:uppercase;color:var(--olive2);margin-top:6px;padding-left:2px}
+.wordmark .sub{display:flex;align-items:center;gap:.9em;font-size:11px;letter-spacing:.46em;text-transform:uppercase;color:var(--olive2);margin-top:6px}
+.wordmark .sub::before,.wordmark .sub::after{content:"";flex:1;height:1px;background:currentColor;opacity:.7}
+.wordmark .sub::before{margin-right:.46em}
 .nl-st{fill:none;stroke:var(--nl-st,#4F6340);stroke-width:var(--nl-sw,3.4);stroke-dasharray:var(--nl-da,3.4 1.6)}.nl-my{fill:var(--nl-my,#C9D3BC);stroke:var(--nl-st,#4F6340);stroke-width:1.4}.nl-stem{fill:none;stroke:var(--nl-stem,#4F6340);stroke-width:2.6;stroke-linecap:round}.nl-leaf{fill:var(--nl-leaf,#6B8F6B)}.nl-olive{fill:var(--nl-olive,#8A9A4A)}.nl-edge{fill:var(--nl-edge,#6B8F6B)}.nl-cream{fill:var(--nl-cream,#EFE6D2)}.nl-gr{fill:var(--nl-gr,#3F5A3A)}.nl-rd{fill:var(--nl-rd,#C97A60)}.nl-bud{fill:var(--nl-bud,#6B8F6B)}
 .nl-o{display:inline-block;width:.47em;height:.66em;vertical-align:-0.02em;margin:0 .015em}
 .nav{display:flex;align-items:center;gap:6px}
@@ -101,7 +103,7 @@ p{margin:0 0 1em}
   .notice{font-size:11px;padding:8px 16px}
   .brand > svg{width:60px;height:39px}
   .wordmark .name{font-size:22px}
-  .wordmark .sub{font-size:9px;letter-spacing:.44em;margin-top:5px}
+  .wordmark .sub{font-size:9px;margin-top:5px}
 }
 
 /* Home hero */

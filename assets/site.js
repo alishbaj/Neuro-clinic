@@ -30,7 +30,7 @@
   if (toggle && nav) toggle.addEventListener('click', function(){
     var open = nav.classList.toggle('open');
     toggle.setAttribute('aria-expanded', open);
-    toggle.textContent = open ? 'Close' : 'Menu';
+    toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
   });
   document.querySelectorAll('.has-menu > button').forEach(function(btn){
     btn.addEventListener('click', function(e){
@@ -50,16 +50,6 @@
     if (a.getAttribute('href').split('#')[0] === here) a.setAttribute('aria-current','page');
   });
 
-  /* 5. Hero animation: paint the still photo first, then fade in the
-        animated sky once the page has finished loading. */
-  var hero = document.querySelector('.hero iframe[data-src]');
-  if (hero && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-    window.addEventListener('load', function(){
-      hero.addEventListener('load', function(){ hero.classList.add('ready'); });
-      hero.src = hero.getAttribute('data-src');
-    });
-  }
-
-  /* 6. Footer year */
+  /* 5. Footer year */
   document.querySelectorAll('[data-year]').forEach(function(el){ el.textContent = new Date().getFullYear(); });
 })();

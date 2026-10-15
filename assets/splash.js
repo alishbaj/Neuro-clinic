@@ -6,8 +6,8 @@
 (function(){
   var KEY = 'nl-splash-seen';
   /* Playback speed: every duration and delay below is authored at 1x and
-     scaled by this (0.5 = twice as fast). */
-  var SPEED = 0.5;
+     scaled by this (0.5 = twice as fast, 0.7 = current). */
+  var SPEED = 0.7;
   function T(ms){ return Math.round(ms * SPEED); }
   function scaleTimes(str){
     return str.replace(/(\d*\.?\d+)(ms|s)(?![a-z-])/g, function(_, n, u){

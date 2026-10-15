@@ -108,6 +108,9 @@
   '#nlsp.nlsp-out .nlsp-stage{opacity:0;transform:translateY(-6vh)}' +
   '#nlsp .nlsp-mark{width:min(420px,80vw,58vh);transform:translateY(var(--dy,0)) scale(1.16);transition:transform 1.05s cubic-bezier(.65,0,.2,1)}' +
   '#nlsp.nlsp-b .nlsp-mark{transform:none}' +
+  '#nlsp .nlsp-net{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}' +
+  '#nlsp.nlsp-fire .nlsp-soma{animation:nlsp-fire-soma .6s ease-out}' +
+  '@keyframes nlsp-fire-soma{0%,100%{transform:none}35%{transform:scale(1.22)}}' +
   '#nlsp .nlsp-svg{display:block;width:100%;height:auto;overflow:visible}' +
   /* generic timed pieces */
   '#nlsp .nlsp-draw{stroke-dasharray:1;stroke-dashoffset:1}' +
@@ -182,6 +185,7 @@
   el.id = 'nlsp';
   el.setAttribute('aria-hidden', 'true');
   el.innerHTML = scaleTimes(
+    '<canvas class="nlsp-net"></canvas>' +
     '<div class="nlsp-stage">' +
       '<div class="nlsp-mark">' + mark + '</div>' +
       '<div class="nlsp-text">' +
@@ -205,6 +209,100 @@
     markEl.style.setProperty('--dy', (stage.offsetHeight / 2 - (markEl.offsetTop + markEl.offsetHeight / 2)).toFixed(1) + 'px');
   }
   centre();
+
+  /* Brain pulse: once the neuron fires, a wave spreads from the soma across
+     the whole screen, lighting a hidden mesh of stitched nodes. Nodes light
+     when the wavefront reaches them and the signal visibly runs along each
+     connection; everything then settles to a faint network. */
+  function pulse(){
+    var cv = el.querySelector('.nlsp-net'), ctx = cv.getContext && cv.getContext('2d');
+    if (!ctx) return;
+    el.classList.add('nlsp-fire');
+    var W = innerWidth, H = innerHeight, dpr = Math.min(window.devicePixelRatio || 1, 2);
+    cv.width = W * dpr; cv.height = H * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    var r = el.querySelector('.nlsp-svg').getBoundingClientRect();
+    var ox = r.left + (SOMA[0] - 40) / 348 * r.width, oy = r.top + (SOMA[1] - 8) / 226 * r.height;
+    /* keep the mesh out from behind the lockup: an oval clearing around it
+       with a soft edge, so the network feathers in rather than boxing it */
+    var st = el.querySelector('.nlsp-stage').getBoundingClientRect();
+    var cx = st.left + st.width / 2, cy = st.top + st.height / 2, rx = st.width / 2 + 40, ry = st.height / 2 + 40;
+    function weight(x, y){
+      var e = Math.hypot((x - cx) / rx, (y - cy) / ry);
+      if (e < 1) return 0;
+      var k = Math.min(1, (e - 1) / .55);
+      return k * k * (3 - 2 * k);
+    }
+
+    var gap = W < 600 ? 62 : 86, cols = Math.ceil(W / gap) + 1, rows = Math.ceil(H / gap) + 1;
+    var maxD = Math.max(Math.hypot(ox, oy), Math.hypot(W - ox, oy), Math.hypot(ox, H - oy), Math.hypot(W - ox, H - oy));
+    var speed = maxD / T(2200), grid = [], nodes = [], edges = [];
+    for (var gy = 0; gy < rows; gy++) for (var gx = 0; gx < cols; gx++) {
+      var x = gx * gap + (Math.random() - .5) * gap * .7, y = gy * gap + (Math.random() - .5) * gap * .7, n = null, w = weight(x, y);
+      if (w > 0) {
+        n = { x: x, y: y, w: w, hit: Math.hypot(x - ox, y - oy) / speed + Math.random() * T(160) };
+        nodes.push(n);
+      }
+      grid.push(n);
+    }
+    function at2(gx, gy){ return gx < cols && gy < rows ? grid[gy * cols + gx] : null; }
+    for (gy = 0; gy < rows; gy++) for (gx = 0; gx < cols; gx++) {
+      var a = at2(gx, gy); if (!a) continue;
+      [at2(gx + 1, gy), at2(gx, gy + 1), Math.random() < .5 ? at2(gx + 1, gy + 1) : null].forEach(function(b){
+        if (b) edges.push(a.hit <= b.hit ? [a, b] : [b, a]);
+      });
+    }
+    var last = nodes.reduce(function(m, n){ return Math.max(m, n.hit); }, 0), FADE = T(1500);
+    function lit(n, t){ return t < n.hit ? -1 : Math.exp(-(t - n.hit) / FADE); }
+
+    var t0 = performance.now();
+    (function frame(now){
+      if (!el.parentNode) return;
+      var t = now - t0;
+      ctx.clearRect(0, 0, W, H);
+
+      /* the wavefront: two soft rings */
+      [0, T(320)].forEach(function(lag, k){
+        var R = (t - lag) * speed;
+        if (R <= 0 || R > maxD) return;
+        var a = (k ? .16 : .32) * (1 - R / maxD);
+        ctx.lineWidth = k ? 1 : 1.6;
+        ctx.strokeStyle = 'rgba(107,143,107,' + a + ')';
+        ctx.beginPath(); ctx.arc(ox, oy, R, 0, Math.PI * 2); ctx.stroke();
+      });
+
+      /* connections: the signal travels from the earlier node to the later one */
+      ctx.lineWidth = 1;
+      edges.forEach(function(e){
+        var a = e[0], b = e[1];
+        if (t < a.hit) return;
+        var p = b.hit > a.hit ? Math.min(1, (t - a.hit) / (b.hit - a.hit)) : 1;
+        var l = Math.max(lit(a, t), lit(b, t), 0);
+        ctx.strokeStyle = 'rgba(79,99,64,' + Math.min(a.w, b.w) * (.045 + .45 * l) + ')';
+        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(a.x + (b.x - a.x) * p, a.y + (b.y - a.y) * p); ctx.stroke();
+      });
+
+      /* nodes: tiny stitched crosses that flash terracotta as the wave hits */
+      nodes.forEach(function(n){
+        var l = lit(n, t);
+        if (l < 0) return;
+        var s = 2.2 * (1 + .7 * l), h = s / 2;
+        if (l > .3) {
+          var g = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, 14 * l);
+          g.addColorStop(0, 'rgba(233,201,138,' + .55 * l * n.w + ')'); g.addColorStop(1, 'rgba(233,201,138,0)');
+          ctx.fillStyle = g; ctx.fillRect(n.x - 14, n.y - 14, 28, 28);
+        }
+        ctx.fillStyle = 'rgba(107,143,107,' + n.w * (.16 + .66 * l) + ')';
+        ctx.fillRect(n.x - h, n.y - h - s, s, s * 3); ctx.fillRect(n.x - h - s, n.y - h, s * 3, s);
+        if (l > .25) {
+          ctx.fillStyle = 'rgba(201,122,96,' + n.w * l * l + ')';
+          ctx.fillRect(n.x - h, n.y - h, s, s);
+        }
+      });
+
+      if (t < last + FADE * 2.5) requestAnimationFrame(frame);
+    })(t0);
+  }
 
   var timers = [], done = false;
   function at(ms, fn){ timers.push(setTimeout(fn, ms)); }
@@ -230,6 +328,7 @@
 
   requestAnimationFrame(function(){ requestAnimationFrame(function(){
     el.classList.add('nlsp-a');
+    at(T(1950), pulse);
     at(T(2050), function(){
       fontReady.then(function(){
         if (done) return;

@@ -5,6 +5,15 @@
    Add ?splash to a URL to replay it. */
 (function(){
   var KEY = 'nl-splash-seen';
+  /* Playback speed: every duration and delay below is authored at 1x and
+     scaled by this (0.5 = twice as fast). */
+  var SPEED = 0.5;
+  function T(ms){ return Math.round(ms * SPEED); }
+  function scaleTimes(str){
+    return str.replace(/(\d*\.?\d+)(ms|s)(?![a-z-])/g, function(_, n, u){
+      return +(n * SPEED).toFixed(3) + u;
+    });
+  }
   var force = /[?&]splash\b/.test(location.search);
   try { if (!force && sessionStorage.getItem(KEY)) return; sessionStorage.setItem(KEY, '1'); } catch (e) {}
   if (!force && window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -166,13 +175,13 @@
   var HEM = '<svg aria-hidden="true"><defs><pattern id="nlsp-hp" width="28" height="24" patternUnits="userSpaceOnUse"><g fill="#C97A60"><rect x="12" y="3" width="3" height="3"/><rect x="9" y="6" width="3" height="3"/><rect x="15" y="6" width="3" height="3"/><rect x="6" y="9" width="3" height="3"/><rect x="18" y="9" width="3" height="3"/><rect x="9" y="12" width="3" height="3"/><rect x="15" y="12" width="3" height="3"/><rect x="12" y="15" width="3" height="3"/></g><rect x="12" y="9" width="3" height="3" fill="#4F6340"/><g fill="#6B8F6B"><rect x="0" y="9" width="3" height="3"/><rect x="25" y="9" width="3" height="3"/></g></pattern></defs><rect width="100%" height="24" fill="url(#nlsp-hp)"/></svg>';
 
   var style = document.createElement('style');
-  style.textContent = css;
+  style.textContent = scaleTimes(css);
   document.head.appendChild(style);
 
   var el = document.createElement('div');
   el.id = 'nlsp';
   el.setAttribute('aria-hidden', 'true');
-  el.innerHTML =
+  el.innerHTML = scaleTimes(
     '<div class="nlsp-stage">' +
       '<div class="nlsp-mark">' + mark + '</div>' +
       '<div class="nlsp-text">' +
@@ -182,7 +191,7 @@
       '</div>' +
     '</div>' +
     '<button class="nlsp-skip" type="button" tabindex="-1">Skip</button>' +
-    '<div class="nlsp-hem">' + HEM + '</div>';
+    '<div class="nlsp-hem">' + HEM + '</div>');
 
   var root = document.documentElement;
   root.classList.add('nlsp-lock');
@@ -207,7 +216,7 @@
     root.classList.remove('nlsp-lock');
     var remove = function(){ if (el.parentNode) el.parentNode.removeChild(el); style.remove && style.remove(); };
     el.addEventListener('transitionend', function(e){ if (e.target === el) remove(); });
-    setTimeout(remove, 1400);
+    setTimeout(remove, T(1400));
     document.removeEventListener('keydown', finish, true);
   }
 
@@ -221,12 +230,12 @@
 
   requestAnimationFrame(function(){ requestAnimationFrame(function(){
     el.classList.add('nlsp-a');
-    at(2050, function(){
+    at(T(2050), function(){
       fontReady.then(function(){
         if (done) return;
         centre();
         el.classList.add('nlsp-b');
-        at(2350, finish);
+        at(T(2350), finish);
       });
     });
   }); });

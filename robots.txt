@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://alishbaj.github.io/Neuro-clinic/sitemap.xml

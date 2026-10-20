@@ -75,8 +75,8 @@ p{margin:0 0 1em}
 
 .site-header{position:sticky;top:0;z-index:40;background:var(--linen);border-bottom:1px solid var(--line);transition:box-shadow .25s}
 .site-header.scrolled{box-shadow:0 10px 30px -18px rgba(47,62,46,.35)}
-.site-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:32px;height:92px;transition:height .25s}
-.site-header.scrolled .wrap{height:72px}
+.site-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:32px;height:82px;padding-top:10px;transition:height .25s,padding .25s}
+.site-header.scrolled .wrap{height:66px;padding-top:6px}
 /* full-width header: logo at the left edge, nav spread across the rest */
 .site-header .wrap,.utility .wrap{max-width:none;padding-left:clamp(20px,4vw,72px);padding-right:clamp(20px,4vw,72px)}
 @media (min-width:1081px){
@@ -122,7 +122,7 @@ p{margin:0 0 1em}
   .nav > a::after,.nav > .has-menu > button::after{left:10px;right:10px}
 }
 @media (max-width:1080px){
-  .site-header .wrap,.site-header.scrolled .wrap{height:76px}
+  .site-header .wrap,.site-header.scrolled .wrap{height:76px;padding-top:0}
   .nav{display:none;position:fixed;top:var(--nav-top,76px);left:0;right:0;bottom:0;background:var(--linen);flex-direction:column;align-items:stretch;gap:0;padding:8px 20px 28px;overflow:auto}
   .nav.open{display:flex}
   .nav > a,.nav > .has-menu > button{width:100%;height:auto;justify-content:space-between;padding:16px 4px;font-size:17px;border-bottom:1px solid var(--line)}

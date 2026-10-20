@@ -82,7 +82,8 @@ p{margin:0 0 1em}
 @media (min-width:1081px){
   .nav{flex:1;justify-content:space-between;margin-left:clamp(16px,6vw - 40px,120px)}
 }
-.brand{display:flex;align-items:center;gap:12px;flex:none}
+.brand{display:flex;align-items:center;gap:0;flex:none}
+.brand-word{margin-left:-8px}
 .brand > img{display:block;width:auto;flex:none;transition:height .25s}
 .brand-mark{height:58px}
 .brand-word{height:44px}

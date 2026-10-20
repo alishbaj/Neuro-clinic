@@ -21,10 +21,10 @@
   /* ---------- Logo pieces (cut from the primary logo artwork) ---------- */
   var BASE = (document.currentScript && document.currentScript.src || '').replace(/[^\/]*$/, '');
   /* Points inside logo-mark.webp, as fractions of its width / height */
-  var SOMA = [.3225, .498];
-  var AXON = [[.3225, .498], [.43, .58], [.57, .7], [.74, .855]];
+  var SOMA = [.3241, .4991];
+  var AXON = [[.3241, .4991], [.43, .58], [.57, .7], [.74, .855]];
   /* Where the olive "o" sits inside splash-wordmark.webp: left, top, width, height */
-  var OLIVE = [.4795, .1484, .0685, .3709];
+  var OLIVE = [.4802, .1639, .0670, .3607];
 
   var mark =
     '<div class="nlsp-art">' +
@@ -35,9 +35,9 @@
 
   var word =
     '<div class="nlsp-word">' +
-      '<img class="nlsp-img" src="' + BASE + 'splash-wordmark.webp" alt="" width="1200" height="272">' +
+      '<img class="nlsp-img" src="' + BASE + 'splash-wordmark.webp" alt="" width="1060" height="244">' +
       '<span class="nlsp-o" style="left:' + OLIVE[0]*100 + '%;top:' + OLIVE[1]*100 + '%;width:' + OLIVE[2]*100 + '%;height:' + OLIVE[3]*100 + '%">' +
-        '<img src="' + BASE + 'splash-olive.webp" alt="" width="160" height="196"></span>' +
+        '<img src="' + BASE + 'splash-olive.webp" alt="" width="71" height="88"></span>' +
     '</div>';
 
   var css =
@@ -54,9 +54,9 @@
   '#nlsp .nlsp-img{display:block;width:100%;height:auto;max-width:none}' +
   /* the neuron grows out from the soma */
   '#nlsp .nlsp-art{position:relative}' +
-  '#nlsp .nlsp-art .nlsp-img{clip-path:circle(0% at 32.25% 49.8%);filter:blur(6px);opacity:.4}' +
+  '#nlsp .nlsp-art .nlsp-img{clip-path:circle(0% at 32.41% 49.91%);filter:blur(6px);opacity:.4}' +
   '#nlsp.nlsp-a .nlsp-art .nlsp-img{animation:nlsp-grow 1.7s cubic-bezier(.45,0,.2,1) .15s forwards}' +
-  '@keyframes nlsp-grow{55%{filter:blur(0);opacity:1}100%{clip-path:circle(80% at 32.25% 49.8%);filter:blur(0);opacity:1}}' +
+  '@keyframes nlsp-grow{55%{filter:blur(0);opacity:1}100%{clip-path:circle(80% at 32.41% 49.91%);filter:blur(0);opacity:1}}' +
   /* glows: the soma fires, then a signal runs down the axon */
   '#nlsp .nlsp-glow{position:absolute;width:13%;aspect-ratio:1;border-radius:50%;transform:translate(-50%,-50%) scale(0);opacity:0;pointer-events:none;mix-blend-mode:multiply;background:radial-gradient(closest-side,rgba(255,246,216,.95),rgba(233,201,138,.75) 40%,rgba(201,122,96,0))}' +
   '#nlsp .nlsp-soma{mix-blend-mode:normal;background:radial-gradient(closest-side,rgba(255,246,216,.85),rgba(233,201,138,.45) 45%,rgba(233,201,138,0))}' +
@@ -99,7 +99,7 @@
     '<div class="nlsp-stage">' +
       '<div class="nlsp-mark">' + mark + '</div>' +
       '<div class="nlsp-text">' + word +
-        '<img class="nlsp-img nlsp-tag" src="' + BASE + 'splash-tagline.webp" alt="" width="1200" height="36">' +
+        '<img class="nlsp-img nlsp-tag" src="' + BASE + 'splash-tagline.webp" alt="" width="948" height="33">' +
       '</div>' +
     '</div>' +
     '<button class="nlsp-skip" type="button" tabindex="-1">Skip</button>' +

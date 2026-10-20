@@ -77,6 +77,11 @@ p{margin:0 0 1em}
 .site-header.scrolled{box-shadow:0 10px 30px -18px rgba(47,62,46,.35)}
 .site-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:32px;height:92px;transition:height .25s}
 .site-header.scrolled .wrap{height:72px}
+/* full-width header: logo at the left edge, nav spread across the rest */
+.site-header .wrap,.utility .wrap{max-width:none;padding-left:clamp(20px,4vw,72px);padding-right:clamp(20px,4vw,72px)}
+@media (min-width:1081px){
+  .nav{flex:1;justify-content:space-between;margin-left:clamp(16px,6vw - 40px,120px)}
+}
 .brand{display:flex;align-items:center;gap:12px;flex:none}
 .brand > img{display:block;width:auto;flex:none;transition:height .25s}
 .brand-mark{height:58px}

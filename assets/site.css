@@ -156,6 +156,7 @@ p{margin:0 0 1em}
 .home-hero h1{margin:0 0 clamp(28px,2.6vw,40px);font-family:var(--sans);font-size:clamp(40px,5vw,76px);font-weight:500;line-height:1.04;letter-spacing:-.035em;color:var(--linen)}
 .home-hero h1 span{display:block}
 .hero-copy{max-width:420px}
+.home-hero .actions .btn{border-radius:0}
 .hero-copy p{margin:0 0 24px;font-size:17px;line-height:1.55;color:#DCE2D3}
 
 @media (max-width:600px){

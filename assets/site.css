@@ -151,7 +151,6 @@ p{margin:0 0 1em}
 .home-hero h1 span{display:block}
 .hero-copy{max-width:420px}
 .hero-copy p{margin:0 0 24px;font-size:17px;line-height:1.55;color:#DCE2D3}
-.hero-copy p.hero-cred{margin:22px 0 0;font-size:13.5px;line-height:1.5;color:#B9C4AD}
 
 @media (max-width:600px){
   .home-hero{min-height:0}

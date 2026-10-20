@@ -27,6 +27,8 @@ Contact page, so nothing is ever a broken link.
   `assets/site.js` — nav and link wiring.
 - `assets/tatreez-*.svg`, `assets/olive-branch.svg` — stitched dividers and
   the olive-branch hero art.
+- `assets/logo.webp` — the full logo. The header uses `logo-mark.webp` +
+  `logo-wordmark.webp`; `splash.js` animates the `splash-*.webp` pieces.
 - `sitemap.xml`, `robots.txt` — update the base URL in both (and the
   `<link rel="canonical">` tags) when the practice gets its own domain.
 

@@ -68,14 +68,9 @@ p{margin:0 0 1em}
 .site-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-top:16px;padding-bottom:16px}
 .brand{display:flex;align-items:center;gap:12px;color:var(--olive)}
 .brand:hover{color:var(--olive)}
-.brand > svg{width:80px;height:52px;flex:none}
-.wordmark{display:flex;flex-direction:column;line-height:1}
-.wordmark .name{font-family:var(--serif);font-size:27px;font-weight:600;letter-spacing:.01em;white-space:nowrap;color:#2F3E2E}
-.wordmark .sub{display:flex;align-items:center;gap:.9em;font-size:11px;letter-spacing:.46em;text-transform:uppercase;color:var(--olive2);margin-top:6px}
-.wordmark .sub::before,.wordmark .sub::after{content:"";flex:1;height:1px;background:currentColor;opacity:.7}
-.wordmark .sub::before{margin-right:.46em}
-.nl-st{fill:none;stroke:var(--nl-st,#4F6340);stroke-width:var(--nl-sw,3.4);stroke-dasharray:var(--nl-da,3.4 1.6)}.nl-my{fill:var(--nl-my,#C9D3BC);stroke:var(--nl-st,#4F6340);stroke-width:1.4}.nl-stem{fill:none;stroke:var(--nl-stem,#4F6340);stroke-width:2.6;stroke-linecap:round}.nl-leaf{fill:var(--nl-leaf,#6B8F6B)}.nl-olive{fill:var(--nl-olive,#8A9A4A)}.nl-edge{fill:var(--nl-edge,#6B8F6B)}.nl-cream{fill:var(--nl-cream,#EFE6D2)}.nl-gr{fill:var(--nl-gr,#3F5A3A)}.nl-rd{fill:var(--nl-rd,#C97A60)}.nl-bud{fill:var(--nl-bud,#6B8F6B)}
-.nl-o{display:inline-block;width:.47em;height:.66em;vertical-align:-0.02em;margin:0 .015em}
+.brand > img{display:block;width:auto;flex:none}
+.brand-mark{height:56px}
+.brand-word{height:44px}
 .nav{display:flex;align-items:center;gap:6px}
 .nav > a,.nav > .has-menu > button{font-size:15px;color:var(--olive);padding:10px 12px;border-radius:999px;background:none;border:0;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
 .nav > a:hover,.nav > .has-menu > button:hover,.nav > a[aria-current]{color:var(--terracotta)}
@@ -101,9 +96,8 @@ p{margin:0 0 1em}
 }
 @media (max-width:600px){
   .notice{font-size:11px;padding:8px 16px}
-  .brand > svg{width:60px;height:39px}
-  .wordmark .name{font-size:22px}
-  .wordmark .sub{font-size:9px;margin-top:5px}
+  .brand-mark{height:42px}
+  .brand-word{height:34px}
 }
 
 /* Home hero */

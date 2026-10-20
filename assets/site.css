@@ -92,7 +92,7 @@ p{margin:0 0 1em}
 
 .nav{display:flex;align-items:stretch;align-self:stretch;gap:4px}
 .nav > a,.nav > .has-menu > button{position:relative;display:inline-flex;align-items:flex-end;gap:7px;height:100%;padding:0 14px 17px;background:none;border:0;font-size:15px;font-weight:500;letter-spacing:.005em;color:#2F3E2E;white-space:nowrap}
-.nav > a::after,.nav > .has-menu > button::after{content:"";position:absolute;left:14px;right:14px;bottom:-1px;height:2px;background:var(--olive2);transform:scaleX(0);transition:transform .2s ease}
+.nav > a::after,.nav > .has-menu > button::after{content:"";position:absolute;left:14px;right:14px;bottom:10px;height:2px;background:var(--olive2);transform:scaleX(0);transition:transform .2s ease}
 .nav > a:hover,.nav > .has-menu > button:hover,.has-menu.open > button{color:var(--olive2)}
 .nav > a:hover::after,.nav > a[aria-current]::after,.has-menu.open > button::after,.has-menu.current > button::after{transform:none}
 .nav > a[aria-current]{color:var(--olive2)}

@@ -26,28 +26,73 @@
   });
 
   /* 3. Mobile nav + dropdown menus */
+  var header = document.querySelector('.site-header');
   var toggle = document.querySelector('.nav-toggle'), nav = document.querySelector('.nav');
-  if (toggle && nav) toggle.addEventListener('click', function(){
-    var open = nav.classList.toggle('open');
+  var desktop = window.matchMedia('(min-width:1081px)'), hover = window.matchMedia('(hover:hover) and (pointer:fine)');
+  function setDrawer(open){
+    if (!toggle || !nav) return;
+    if (open && header) nav.style.setProperty('--nav-top', header.getBoundingClientRect().bottom + 'px');
+    nav.classList.toggle('open', open);
+    document.documentElement.classList.toggle('nav-open', open);
     toggle.setAttribute('aria-expanded', open);
     toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-  });
-  document.querySelectorAll('.has-menu > button').forEach(function(btn){
+  }
+  if (toggle && nav) toggle.addEventListener('click', function(){ setDrawer(!nav.classList.contains('open')); });
+  (desktop.addEventListener ? desktop.addEventListener.bind(desktop, 'change') : desktop.addListener.bind(desktop))(function(){ setDrawer(false); closeMenus(); });
+
+  function setMenu(li, open){
+    li.classList.toggle('open', open);
+    li.querySelector('button').setAttribute('aria-expanded', open);
+  }
+  function closeMenus(except){
+    document.querySelectorAll('.has-menu.open').forEach(function(o){ if (o !== except) setMenu(o, false); });
+  }
+  document.querySelectorAll('.has-menu').forEach(function(li){
+    var btn = li.querySelector('button'), timer;
     btn.addEventListener('click', function(e){
       e.stopPropagation();
-      var li = btn.parentElement, open = li.classList.toggle('open');
-      document.querySelectorAll('.has-menu.open').forEach(function(o){ if (o !== li) { o.classList.remove('open'); o.querySelector('button').setAttribute('aria-expanded','false'); } });
-      btn.setAttribute('aria-expanded', open);
+      closeMenus(li);
+      setMenu(li, !li.classList.contains('open'));
+    });
+    /* desktop: open on hover, with a short grace period when leaving */
+    li.addEventListener('mouseenter', function(){
+      if (!desktop.matches || !hover.matches) return;
+      clearTimeout(timer); closeMenus(li); setMenu(li, true);
+    });
+    li.addEventListener('mouseleave', function(){
+      if (!desktop.matches || !hover.matches) return;
+      timer = setTimeout(function(){ setMenu(li, false); }, 180);
+    });
+    li.addEventListener('focusout', function(e){
+      if (desktop.matches && !li.contains(e.relatedTarget)) setMenu(li, false);
     });
   });
-  document.addEventListener('click', function(){
-    document.querySelectorAll('.has-menu.open').forEach(function(o){ o.classList.remove('open'); o.querySelector('button').setAttribute('aria-expanded','false'); });
+  document.addEventListener('click', function(e){ if (!e.target.closest('.has-menu')) closeMenus(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key !== 'Escape') return;
+    var open = document.querySelector('.has-menu.open');
+    if (open) { setMenu(open, false); open.querySelector('button').focus(); }
+    else if (nav && nav.classList.contains('open')) { setDrawer(false); toggle.focus(); }
   });
+
+  /* Header gains a shadow and compacts once the page scrolls */
+  if (header) {
+    var onScroll = function(){ header.classList.toggle('scrolled', window.scrollY > 8); };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+  }
 
   /* 4. Mark the current page in the nav */
   var here = location.pathname.split('/').pop() || 'index.html';
   document.querySelectorAll('.nav a[href]').forEach(function(a){
-    if (a.getAttribute('href').split('#')[0] === here) a.setAttribute('aria-current','page');
+    if (a.getAttribute('href').split('#')[0] !== here || a.hasAttribute('data-link')) return;
+    if (a.closest('.menu')) {
+      /* only the first matching item, so brain-health.html doesn't mark the Blueprint anchor too */
+      var li = a.closest('.has-menu');
+      if (li.classList.contains('current')) return;
+      li.classList.add('current');
+    }
+    a.setAttribute('aria-current','page');
   });
 
   /* 5. Footer year */

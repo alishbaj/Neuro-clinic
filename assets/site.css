@@ -141,34 +141,27 @@ p{margin:0 0 1em}
 }
 
 /* Home hero */
-.home-hero{position:relative;overflow:hidden;background:#2B3A26;color:var(--linen);min-height:min(760px,calc(100vh - 130px));display:flex;align-items:flex-end}
+.home-hero{position:relative;overflow:hidden;background:#2B3A26;color:var(--linen);min-height:clamp(480px,36vw,700px);display:flex;align-items:center}
 .hero-art{position:absolute;inset:0;width:100%;height:100%}
 .h-branch{fill:none;stroke:#36492F;stroke-width:150;stroke-linecap:round}
 .h-leaf{fill:#3A4F32}.h-leaf2{fill:#34472D}
 .h-olive{fill:#42583A}.h-olive2{fill:#36492F}
-.hero-inner{position:relative;width:100%;padding-top:120px;padding-bottom:72px}
-.home-hero h1{margin:0 0 44px;font-size:clamp(44px,5.7vw,86px);font-weight:500;line-height:.98;letter-spacing:-.015em;color:var(--linen)}
+.hero-inner{position:relative;width:100%;padding-top:clamp(72px,9vw,150px);padding-bottom:clamp(48px,5vw,90px)}
+.home-hero h1{margin:0 0 clamp(28px,2.6vw,40px);font-size:clamp(42px,5.2vw,80px);font-weight:500;line-height:1;letter-spacing:-.015em;color:var(--linen)}
 .home-hero .l1{display:block}
 .stitch{position:relative;display:inline-block;padding-bottom:.1em;white-space:nowrap}
 .stitch::after{content:"";position:absolute;left:0;right:0;bottom:-.19em;height:.26em;background:url(axon-tile.svg) left center/auto 100% round no-repeat}
 .axon-end{position:absolute;left:calc(100% - .02em);bottom:-.51em;height:1.6em;width:auto;overflow:visible;pointer-events:none}
-.hero-foot{display:flex;justify-content:space-between;align-items:flex-end;gap:48px;flex-wrap:wrap}
-.hero-copy{max-width:520px}
-.hero-copy p{margin:0 0 28px;font-size:19px;line-height:1.6;color:#DCE2D3}
-.hero-facts{display:flex;gap:40px;margin:0;font-size:14px;line-height:1.45}
-.hero-facts div{max-width:220px;padding-left:16px;border-left:2px solid #55704A}
-.hero-facts dt{font-weight:600;color:var(--linen)}
-.hero-facts dd{margin:4px 0 0;color:#C3CDB8}
-@media (max-width:900px){
-  .hero-facts{gap:24px}
-}
+.hero-copy{max-width:420px}
+.hero-copy p{margin:0 0 24px;font-size:17px;line-height:1.55;color:#DCE2D3}
+.hero-copy p.hero-cred{margin:22px 0 0;font-size:13.5px;line-height:1.5;color:#B9C4AD}
+
 @media (max-width:600px){
   .home-hero{min-height:0}
   .hero-inner{padding-top:72px;padding-bottom:48px}
   .home-hero h1{margin-bottom:28px}
-  .hero-copy p{font-size:17px}
   .home-hero .actions .btn{flex:1 1 100%}
-  .hero-facts{flex-direction:column;gap:18px}
+  .hero-copy{max-width:none}
   .stitch{white-space:normal}
   .home-hero .l1{display:inline}
 }
